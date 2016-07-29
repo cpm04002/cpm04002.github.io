@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8" />
+  <title>d3.js from Excel - ramblings.mcpher.com</title>
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+  Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+ <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+   google.load("jquery", "1");
+   google.setOnLoadCallback(function() {
+        initialize().then (
+            function (control) {
+                doTheTreeViz(control);
+            }
+        );
+   });
+  </script> <style>
+
+   body {
+    position: relative;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    margin: 1em auto 4em auto;
+    width: 960px;
+   }
+
+   h1 {
+    font-size: 64px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    margin: .3em 0 .1em 0;
+   }
+
+   h2 {
+    margin-top: 2em;
+   }
+
+   h1, h2 {
+    text-rendering: optimizeLegibility;
+   }
+
+   h2 a {
+    color: #ccc;
+    left: -20px;
+    position: absolute;
+    width: 740px;
+   }
+
+   footer {
+    font-size: small;
+    margin-top: 8em;
+   }
+
+   header aside {
+    margin-top: 20px;
+   }
+
+   header aside, footer aside {
+    color: #636363;
+    text-align: right;
+   }
+
+   aside {
+ float:right;
+ display:inline;
+ font-size: small;
+   }
+   .attribution {
+    font-size: small;
+    margin-bottom: 2em;
+   }
+
+   body > p, li > p {
+    line-height: 1.5em;
+   }
+
+   body > p {
+    width: 720px;
+   }
+
+   body > blockquote {
+    width: 640px;
+   }
+
+   li {
+    width: 680px;
+   }
+
+   pre, code, textarea {
+    font-family: "Menlo", monospace;
+   }
+
+   code {
+    line-height: 1em;
+   }
+
+   textarea {
+    font-size: 100%;
+   }
+
+   body > pre {
+    border-left: solid 2px #ccc;
+    padding-left: 18px;
+    margin: 2em 0 2em -20px;
+   }
+
+   .html .value, .javascript .string, .javascript .regexp {
+    color: #756bb1;
+   }
+
+   .html .tag, .css .tag, .javascript .keyword {
+    color: #3182bd;
+   }
+
+   .comment {
+    color: #636363;
+   }
+
+   .html .doctype, .javascript .number {
+    color: #31a354;
+   }
+
+   .html .attribute, .css .attribute, .javascript .class, .javascript .special {
+    color: #e6550d;
+   }
+
+   svg {
+    font: 10px sans-serif;
+   }
+
+   .axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+   }
+
+   sup, sub {
+    line-height: 0;
+   }
+
+   q:before, blockquote:before {
+    content: "?";
+   }
+
+   q:after, blockquote:after {
+    content: "?";
+   }
+
+   blockquote:before {
+    position: absolute;
+    left: 2em;
+   }
+
+   blockquote:after {
+    position: absolute;
+   }
+
+  </style>
+  <style>
+   #chart {
+    height: 600px;
+   }
+   .node rect {
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+   }
+   .node text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+   }
+   .link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+   }
+   .link:hover {
+    stroke-opacity: .5;
+   }
+
+   circle.node-dot {
+    fill: DarkSlateGray;
+    stroke: SlateGray;
+    stroke-width: 1px;
+   }
+
+
+   line.link {
+    fill: none;
+    stroke: SlateGray;
+    stroke-width: 1.5px;
+   }
+
+   marker#defaultMarker {
+    fill: SlateGray;
+   }
+
+   line.link.defaultMarker {
+    stroke: SlateGray;
+   }
+
+   circle {
+    fill: #ccc;
+    stroke: #333;
+    stroke-width: 1.5px;
+   }
+
+   text {
+    pointer-events: none;
+   }
+
+   text.shadow {
+    stroke: #fff;
+    stroke-width: 3px;
+    stroke-opacity: .8;
+   }
+
+  </style>  <script>
+  function doTheTreeViz(control) {
+
+    var svg = control.svg;
+
+    var force = control.force;
+    force.nodes(control.nodes)
+        .links(control.links)
+        .start();
+
+    // Update the links
+    var link = svg.selectAll("line.link")
+        .data(control.links, function(d) { return d.unique; } );
+ 
+   // Enter any new links
+    link.enter().insert("svg:line", ".node")
+        .attr("class", "link")
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; })
+      .append("svg:title")
+        .text(function(d) { return d.source[control.options.nodeLabel] + ":" + d.target[control.options.nodeLabel] ; });
+    
+    // Exit any old links.
+    link.exit().remove();
+
+
+  // Update the nodes
+    var node = svg.selectAll("g.node")
+        .data(control.nodes, function(d) { return d.unique; });
+
+    node.select("circle")
+        .style("fill", function(d) {
+            return getColor(d);
+        })
+        .attr("r", function(d) {
+            return getRadius(d);
+        })
+
+  // Enter any new nodes.
+    var nodeEnter = node.enter()
+      .append("svg:g")
+        .attr("class", "node")
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+        .on("dblclick", function(d){
+            control.nodeClickInProgress=false;
+            if (d.url)window.open(d.url);
+        })
+        .on("click", function(d){
+            // this is a hack so that click doesnt fire on the1st click of a dblclick
+            if (!control.nodeClickInProgress ) {
+                control.nodeClickInProgress = true;
+                setTimeout(function(){
+                    if (control.nodeClickInProgress) { 
+                        control.nodeClickInProgress = false;
+                        if (control.options.nodeFocus) {
+                            d.isCurrentlyFocused = !d.isCurrentlyFocused;
+                            doTheTreeViz(makeFilteredData(control));
+                        }
+                    }
+                },control.clickHack); 
+            }
+        })
+        .call(force.drag);
+
+    nodeEnter
+      .append("svg:circle")
+        .attr("r", function(d) {
+            return getRadius(d);
+        })
+        .style("fill", function(d) {
+            return getColor(d);
+        })
+      .append("svg:title")
+        .text(function(d) { return d[control.options.nodeLabel]; });
+
+   if (control.options.nodeLabel) {       
+       // text is done once for shadow as well as for text
+        nodeEnter.append("svg:text")
+            .attr("x", control.options.labelOffset)
+            .attr("dy", ".31em")
+            .attr("class", "shadow")
+            .style("font-size",control.options.labelFontSize + "px")
+            .text(function(d) {
+                return d.shortName ? d.shortName : d.name;
+            });
+        nodeEnter.append("svg:text")
+            .attr("x", control.options.labelOffset)
+            .attr("dy", ".35em")
+            .attr("class", "text")
+            .style("font-size",control.options.labelFontSize + "px")
+            .text(function(d) {
+                return d.shortName ? d.shortName : d.name;
+            });
+    }
+
+    // Exit any old nodes.
+    node.exit().remove();
+    control.link = svg.selectAll("line.link");
+    control.node = svg.selectAll("g.node");
+    force.on("tick", tick);
+
+
+
+    if (control.options.linkName) {
+        link.append("title")
+            .text(function(d) {
+                return d[control.options.linkName];
+        });
+    }
+
+
+    function tick() {
+        link.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+        node.attr("transform", function(d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+
+    }
+ 
+    function getRadius(d) {
+     var r = control.options.radius * (control.options.nodeResize ? Math.sqrt(d[control.options.nodeResize]) / Math.PI : 1);
+     return control.options.nodeFocus && d.isCurrentlyFocused ? control.options.nodeFocusRadius  : r;
+    }
+    function getColor(d) {
+        return control.options.nodeFocus && d.isCurrentlyFocused ? control.options.nodeFocusColor  : control.color(d.group) ;
+    }
+
+   }
+
+function makeFilteredData(control,selectedNode){
+    // we'll keep only the data where filterned nodes are the source or target
+    var newNodes = [];
+    var newLinks = [];
+
+    for (var i = 0; i < control.data.links.length ; i++) {
+        var link = control.data.links[i];
+        if (link.target.isCurrentlyFocused || link.source.isCurrentlyFocused) {
+            newLinks.push(link);
+            addNodeIfNotThere(link.source,newNodes);
+            addNodeIfNotThere(link.target,newNodes);
+        }
+    }
+    // if none are selected reinstate the whole dataset
+    if (newNodes.length > 0) {
+        control.links = newLinks;
+        control.nodes = newNodes;
+    }
+    else {
+        control.nodes = control.data.nodes;
+        control.links = control.data.links;
+    }
+    return control;
+    
+    function addNodeIfNotThere( node, nodes) {
+        for ( var i=0; i < nodes.length; i++) {
+            if (nodes[i].unique == node.unique) return i;
+        }
+        return nodes.push(node) -1;
+    }
+}
+function organizeData(control) {
+
+    for (var i=0; i < control.nodes.length; i ++ ) {
+        var node = control.nodes[i]; 
+        node.unique = i;
+        node.isCurrentlyFocused = false;
+    }
+    
+    for (var i=0; i < control.links.length; i ++ ) {
+        var link = control.links[i];
+        link.unique = i;
+        link.source = control.nodes[link.source];
+        link.target = control.nodes[link.target];
+    }
+    return control;
+}
+
+
+function initialize () {
+   
+    var initPromise = $.Deferred();
+
+    getTheData().then( function (data) {  
+        var control = {};
+        control.data = data;
+        control.divName = "#chart";
+
+        control.options = $.extend({
+            stackHeight : 12,
+            radius : 5,
+            fontSize : 14,
+            labelFontSize : 8,
+            nodeLabel : null,
+            markerWidth : 0,
+            markerHeight : 0,
+            width : $(control.divName).outerWidth(),
+            gap : 1.5,
+            nodeResize : "",
+            linkDistance : 80,
+            charge : -120,
+            styleColumn : null,
+            styles : null,
+            linkName : null,
+            nodeFocus: true,
+            nodeFocusRadius: 25,
+            nodeFocusColor: "black",
+            labelOffset: "5",
+            gravity: .05,
+            height : $(control.divName).outerHeight()
+        }, control.data.d3.options);
+    
+        
+        var options = control.options;
+        options.gap = options.gap * options.radius;
+        control.width = options.width;
+        control.height = options.height;
+        control.data = control.data.d3.data;
+        control.nodes = control.data.nodes;
+        control.links = control.data.links;
+        control.color = d3.scale.category20();
+        control.clickHack = 200;
+        organizeData(control);
+    
+        control.svg = d3.select(control.divName)
+            .append("svg:svg")
+            .attr("width", control.width)
+            .attr("height", control.height);
+        
+    
+        // get list of unique values in stylecolumn
+        control.linkStyles = [];
+        if (control.options.styleColumn) {
+         var x;
+         for (var i = 0; i < control.links.length; i++) {
+          if (control.linkStyles.indexOf( x = control.links[i][control.options.styleColumn].toLowerCase()) == -1)
+           control.linkStyles.push(x);
+         }
+        } 
+        else
+         control.linkStyles[0] = "defaultMarker";
+        
+        control.force = d3.layout.force().
+            size([control.width, control.height])
+            .linkDistance(control.options.linkDistance)
+            .charge(control.options.charge)
+            .gravity(control.options.gravity);
+    
+    
+       initPromise.resolve(control);
+    });
+    return initPromise.promise();
+}
+
+            
+function getTheData() {
+    var dataPromise = $.Deferred();
+    // return a promise if data is being received asynch and resolve it when done.
+    dataPromise.resolve (mcpherTreeData);
+    return dataPromise.promise();
+}
+</script><script> window['mcpherTreeData'] = {"d3":{"options":{"radius":10,"fontSize":9,"labelFontSize":9,"width":1000,"gravity":0.1,"height":1000,"nodeFocusColor":"black","nodeFocusRadius":15,"nodeFocus":true,"linkDistance":100,"charge":-75,"nodeResize":"count","nodeLabel":"label","outerRadius":10,"linkName":"tag"},"data":{"nodes":[{"name":"Nancy Drew","count":8,"group":"Aaron Schmidt","linkCount":8,"label":"Nancy Drew","shortName":"Nancy Drew"},{"name":"Aaron Schmidt","count":1,"group":"Aaron Schmidt","linkCount":1,"label":"Aaron Schmidt","shortName":"Aaron Schmidt"},{"name":"Moon Bounce Command","count":10,"group":"Aaron Yoches","linkCount":10,"label":"Moon Bounce Command","shortName":"Moon Bounce Command"},{"name":"Aaron Yoches","count":1,"group":"Aaron Yoches","linkCount":1,"label":"Aaron Yoches","shortName":"Aaron Yoches"},{"name":"ComedySportz Boston","count":5,"group":"Adi Heller","linkCount":5,"label":"ComedySportz Boston","shortName":"ComedySportz Boston"},{"name":"Adi Heller","count":4,"group":"Adi Heller","linkCount":4,"label":"Adi Heller","shortName":"Adi Heller"},{"name":"HeartBeats","count":4,"group":"Adi Heller","linkCount":4,"label":"HeartBeats","shortName":"HeartBeats"},{"name":"Hell Train","count":2,"group":"Adi Heller","linkCount":2,"label":"Hell Train","shortName":"Hell Train"},{"name":"Not Doctors","count":8,"group":"Adi Heller","linkCount":8,"label":"Not Doctors","shortName":"Not Doctors"},{"name":"Nixon","count":9,"group":"Alden Masters","linkCount":9,"label":"Nixon","shortName":"Nixon"},{"name":"Alden Masters","count":1,"group":"Alden Masters","linkCount":1,"label":"Alden Masters","shortName":"Alden Masters"},{"name":"Mudhut","count":3,"group":"Alex McHale","linkCount":3,"label":"Mudhut","shortName":"Mudhut"},{"name":"Alex McHale","count":1,"group":"Alex McHale","linkCount":1,"label":"Alex McHale","shortName":"Alex McHale"},{"name":"Aeropuerto","count":2,"group":"Amy Click","linkCount":2,"label":"Aeropuerto","shortName":"Aeropuerto"},{"name":"Amy Click","count":9,"group":"Amy Click","linkCount":9,"label":"Amy Click","shortName":"Amy Click"},{"name":"Downton IB","count":1,"group":"Amy Click","linkCount":1,"label":"Downton IB","shortName":"Downton IB"},{"name":"First Date","count":1,"group":"Amy Click","linkCount":1,"label":"First Date","shortName":"First Date"},{"name":"Houdini","count":1,"group":"Amy Click","linkCount":1,"label":"Houdini","shortName":"Houdini"},{"name":"Intervention!","count":2,"group":"Amy Click","linkCount":2,"label":"Intervention!","shortName":"Intervention!"},{"name":"Mainstage","count":4,"group":"Amy Click","linkCount":4,"label":"Mainstage","shortName":"Mainstage"},{"name":"M'Dici","count":3,"group":"Amy Click","linkCount":3,"label":"M'Dici","shortName":"M'Dici"},{"name":"Red Alert","count":3,"group":"Amy Click","linkCount":3,"label":"Red Alert","shortName":"Red Alert"},{"name":"Space: Asteroid Mission","count":1,"group":"Amy Click","linkCount":1,"label":"Space: Asteroid Mission","shortName":"Space: Asteroid Mission"},{"name":"20 Minute Movie","count":8,"group":"Andrew Barlow","linkCount":8,"label":"20 Minute Movie","shortName":"20 Minute Movie"},{"name":"Andrew Barlow","count":11,"group":"Andrew Barlow","linkCount":11,"label":"Andrew Barlow","shortName":"Andrew Barlow"},{"name":"Devlin Down","count":1,"group":"Andrew Barlow","linkCount":1,"label":"Devlin Down","shortName":"Devlin Down"},{"name":"Dreamphone","count":11,"group":"Andrew Barlow","linkCount":11,"label":"Dreamphone","shortName":"Dreamphone"},{"name":"Face Off","count":7,"group":"Andrew Barlow","linkCount":7,"label":"Face Off","shortName":"Face Off"},{"name":"Hatch Babies","count":3,"group":"Andrew Barlow","linkCount":3,"label":"Hatch Babies","shortName":"Hatch Babies"},{"name":"Legitimo","count":1,"group":"Andrew Barlow","linkCount":1,"label":"Legitimo","shortName":"Legitimo"},{"name":"Naffy","count":1,"group":"Andrew Barlow","linkCount":1,"label":"Naffy","shortName":"Naffy"},{"name":"Rabbit","count":2,"group":"Andrew Barlow","linkCount":2,"label":"Rabbit","shortName":"Rabbit"},{"name":"TEJAS","count":1,"group":"Andrew Barlow","linkCount":1,"label":"TEJAS","shortName":"TEJAS"},{"name":"The Dress","count":1,"group":"Andrew Barlow","linkCount":1,"label":"The Dress","shortName":"The Dress"},{"name":"Gloria","count":8,"group":"Anit Das","linkCount":8,"label":"Gloria","shortName":"Gloria"},{"name":"Anit Das","count":1,"group":"Anit Das","linkCount":1,"label":"Anit Das","shortName":"Anit Das"},{"name":"CEREAL","count":2,"group":"Anthony Zonfrelli","linkCount":2,"label":"CEREAL","shortName":"CEREAL"},{"name":"Anthony Zonfrelli","count":3,"group":"Anthony Zonfrelli","linkCount":3,"label":"Anthony Zonfrelli","shortName":"Anthony Zonfrelli"},{"name":"Classic Sly","count":2,"group":"Anthony Zonfrelli","linkCount":2,"label":"Classic Sly","shortName":"Classic Sly"},{"name":"Friends: The One That's Improvised","count":1,"group":"Anthony Zonfrelli","linkCount":1,"label":"Friends: The One That's Improvised","shortName":"Friends: The One That's Improvised"},{"name":"Ashley Voltz","count":4,"group":"Ashley Voltz","linkCount":4,"label":"Ashley Voltz","shortName":"Ashley Voltz"},{"name":"Proud to be an American Girl","count":10,"group":"Ashley Voltz","linkCount":10,"label":"Proud to be an American Girl","shortName":"Proud to be an American Girl"},{"name":"Saint Brad","count":7,"group":"Ashley Voltz","linkCount":7,"label":"Saint Brad","shortName":"Saint Brad"},{"name":"Ben Gibb","count":2,"group":"Ben Gibb","linkCount":2,"label":"Ben Gibb","shortName":"Ben Gibb"},{"name":"4 Seem Nightmare","count":1,"group":"Ben Scurria","linkCount":1,"label":"4 Seem Nightmare","shortName":"4 Seem Nightmare"},{"name":"Ben Scurria","count":26,"group":"Ben Scurria","linkCount":26,"label":"Ben Scurria","shortName":"Ben Scurria"},{"name":"Baby Wisdom","count":1,"group":"Ben Scurria","linkCount":1,"label":"Baby Wisdom","shortName":"Baby Wisdom"},{"name":"Binger Dinger","count":1,"group":"Ben Scurria","linkCount":1,"label":"Binger Dinger","shortName":"Binger Dinger"},{"name":"Bone","count":1,"group":"Ben Scurria","linkCount":1,"label":"Bone","shortName":"Bone"},{"name":"Circus Tension","count":1,"group":"Ben Scurria","linkCount":1,"label":"Circus Tension","shortName":"Circus Tension"},{"name":"Doug and the Bean","count":1,"group":"Ben Scurria","linkCount":1,"label":"Doug and the Bean","shortName":"Doug and the Bean"},{"name":"Forest Dump","count":1,"group":"Ben Scurria","linkCount":1,"label":"Forest Dump","shortName":"Forest Dump"},{"name":"Ghandi","count":1,"group":"Ben Scurria","linkCount":1,"label":"Ghandi","shortName":"Ghandi"},{"name":"Goldblume","count":1,"group":"Ben Scurria","linkCount":1,"label":"Goldblume","shortName":"Goldblume"},{"name":"Grandma's Opals","count":1,"group":"Ben Scurria","linkCount":1,"label":"Grandma's Opals","shortName":"Grandma's Opals"},{"name":"Hender and the Harrysons","count":1,"group":"Ben Scurria","linkCount":1,"label":"Hender and the Harrysons","shortName":"Hender and the Harrysons"},{"name":"Horchata","count":1,"group":"Ben Scurria","linkCount":1,"label":"Horchata","shortName":"Horchata"},{"name":"Lithgow","count":1,"group":"Ben Scurria","linkCount":1,"label":"Lithgow","shortName":"Lithgow"},{"name":"Marigold Surprise","count":1,"group":"Ben Scurria","linkCount":1,"label":"Marigold Surprise","shortName":"Marigold Surprise"},{"name":"Mirical Whip","count":1,"group":"Ben Scurria","linkCount":1,"label":"Mirical Whip","shortName":"Mirical Whip"},{"name":"Neon Dungeon","count":1,"group":"Ben Scurria","linkCount":1,"label":"Neon Dungeon","shortName":"Neon Dungeon"},{"name":"Pottery Barn","count":1,"group":"Ben Scurria","linkCount":1,"label":"Pottery Barn","shortName":"Pottery Barn"},{"name":"Quiz Show","count":1,"group":"Ben Scurria","linkCount":1,"label":"Quiz Show","shortName":"Quiz Show"},{"name":"Rich Uncle","count":1,"group":"Ben Scurria","linkCount":1,"label":"Rich Uncle","shortName":"Rich Uncle"},{"name":"Stick&Bindle","count":1,"group":"Ben Scurria","linkCount":1,"label":"Stick&Bindle","shortName":"Stick&Bindle"},{"name":"Sucatash","count":1,"group":"Ben Scurria","linkCount":1,"label":"Sucatash","shortName":"Sucatash"},{"name":"The English Patient","count":1,"group":"Ben Scurria","linkCount":1,"label":"The English Patient","shortName":"The English Patient"},{"name":"The Goachmen","count":1,"group":"Ben Scurria","linkCount":1,"label":"The Goachmen","shortName":"The Goachmen"},{"name":"Zoo","count":1,"group":"Ben Scurria","linkCount":1,"label":"Zoo","shortName":"Zoo"},{"name":"Awkward by Proxy","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"Awkward by Proxy","shortName":"Awkward by Proxy"},{"name":"Ben Snitkoff","count":17,"group":"Ben Snitkoff","linkCount":17,"label":"Ben Snitkoff","shortName":"Ben Snitkoff"},{"name":"Ben and Brad and Baseball","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"Ben and Brad and Baseball","shortName":"Ben and Brad and Baseball"},{"name":"Fix It In Post","count":2,"group":"Ben Snitkoff","linkCount":2,"label":"Fix It In Post","shortName":"Fix It In Post"},{"name":"Ginsburg","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"Ginsburg","shortName":"Ginsburg"},{"name":"Great Lakes","count":2,"group":"Ben Snitkoff","linkCount":2,"label":"Great Lakes","shortName":"Great Lakes"},{"name":"Let Me Be Precise","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"Let Me Be Precise","shortName":"Let Me Be Precise"},{"name":"Marjean","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"Marjean","shortName":"Marjean"},{"name":"New World Monkeys","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"New World Monkeys","shortName":"New World Monkeys"},{"name":"Oh Boy","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"Oh Boy","shortName":"Oh Boy"},{"name":"Plan B","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"Plan B","shortName":"Plan B"},{"name":"Shays' Rebellion","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"Shays' Rebellion","shortName":"Shays' Rebellion"},{"name":"The Abundance","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"The Abundance","shortName":"The Abundance"},{"name":"The Rack","count":2,"group":"Ben Snitkoff","linkCount":2,"label":"The Rack","shortName":"The Rack"},{"name":"Ultimate Improv","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"Ultimate Improv","shortName":"Ultimate Improv"},{"name":"War Cupcake","count":1,"group":"Ben Snitkoff","linkCount":1,"label":"War Cupcake","shortName":"War Cupcake"},{"name":"Crime Solving Bear","count":1,"group":"Bobby Smithney","linkCount":1,"label":"Crime Solving Bear","shortName":"Crime Solving Bear"},{"name":"Bobby Smithney","count":7,"group":"Bobby Smithney","linkCount":7,"label":"Bobby Smithney","shortName":"Bobby Smithney"},{"name":"Family Show","count":7,"group":"Bobby Smithney","linkCount":7,"label":"Family Show","shortName":"Family Show"},{"name":"Micetro","count":1,"group":"Bobby Smithney","linkCount":1,"label":"Micetro","shortName":"Micetro"},{"name":"Theater Sports","count":2,"group":"Bobby Smithney","linkCount":2,"label":"Theater Sports","shortName":"Theater Sports"},{"name":"Unnatural Selection","count":1,"group":"Bobby Smithney","linkCount":1,"label":"Unnatural Selection","shortName":"Unnatural Selection"},{"name":"The Quarry","count":8,"group":"Brandon Wayner","linkCount":8,"label":"The Quarry","shortName":"The Quarry"},{"name":"Brandon Wayner","count":1,"group":"Brandon Wayner","linkCount":1,"label":"Brandon Wayner","shortName":"Brandon Wayner"},{"name":"All Access Improv","count":3,"group":"Britt Mitchell","linkCount":3,"label":"All Access Improv","shortName":"All Access Improv"},{"name":"Britt Mitchell","count":8,"group":"Britt Mitchell","linkCount":8,"label":"Britt Mitchell","shortName":"Britt Mitchell"},{"name":"Goosebumps","count":2,"group":"Britt Mitchell","linkCount":2,"label":"Goosebumps","shortName":"Goosebumps"},{"name":"Improvised Babysitters Super Special Show","count":1,"group":"Britt Mitchell","linkCount":1,"label":"Improvised Babysitters Super Special Show","shortName":"Improvised Babysitters Super Special Show"},{"name":"Improvised History","count":1,"group":"Britt Mitchell","linkCount":1,"label":"Improvised History","shortName":"Improvised History"},{"name":"Underdogs","count":2,"group":"Britt Mitchell","linkCount":2,"label":"Underdogs","shortName":"Underdogs"},{"name":"Bryan Marshal","count":4,"group":"Bryan Marshal","linkCount":4,"label":"Bryan Marshal","shortName":"Bryan Marshal"},{"name":"Half an EGOT","count":1,"group":"Bryan Marshal","linkCount":1,"label":"Half an EGOT","shortName":"Half an EGOT"},{"name":"Spider House","count":1,"group":"Bryan Marshal","linkCount":1,"label":"Spider House","shortName":"Spider House"},{"name":"The Boston Harold","count":2,"group":"Bryan Marshal","linkCount":2,"label":"The Boston Harold","shortName":"The Boston Harold"},{"name":"Bryan Smith","count":1,"group":"Bryan Smith","linkCount":1,"label":"Bryan Smith","shortName":"Bryan Smith"},{"name":"Improv Jones Boston","count":16,"group":"Burch simon","linkCount":16,"label":"Improv Jones Boston","shortName":"Improv Jones Boston"},{"name":"Burch simon","count":1,"group":"Burch simon","linkCount":1,"label":"Burch simon","shortName":"Burch simon"},{"name":"Charlotte Germain","count":1,"group":"Charlotte Germain","linkCount":1,"label":"Charlotte Germain","shortName":"Charlotte Germain"},{"name":"CANADA!","count":6,"group":"Chloe Ainley","linkCount":6,"label":"CANADA!","shortName":"CANADA!"},{"name":"Chloe Ainley","count":1,"group":"Chloe Ainley","linkCount":1,"label":"Chloe Ainley","shortName":"Chloe Ainley"},{"name":"HAWKFACE","count":1,"group":"Chloe Z","linkCount":1,"label":"HAWKFACE","shortName":"HAWKFACE"},{"name":"Chloe Z","count":2,"group":"Chloe Z","linkCount":2,"label":"Chloe Z","shortName":"Chloe Z"},{"name":"Short Shorts","count":1,"group":"Chloe Z","linkCount":1,"label":"Short Shorts","shortName":"Short Shorts"},{"name":"Chris Kaufman","count":1,"group":"Chris Kaufman","linkCount":1,"label":"Chris Kaufman","shortName":"Chris Kaufman"},{"name":"Chris Madden","count":7,"group":"Chris Madden","linkCount":7,"label":"Chris Madden","shortName":"Chris Madden"},{"name":"Histrionics","count":1,"group":"Chris Madden","linkCount":1,"label":"Histrionics","shortName":"Histrionics"},{"name":"Law and Order: IB Unit","count":2,"group":"Chris Madden","linkCount":2,"label":"Law and Order: IB Unit","shortName":"Law and Order: IB Unit"},{"name":"Old Jennifer Aniston","count":2,"group":"Chris Madden","linkCount":2,"label":"Old Jennifer Aniston","shortName":"Old Jennifer Aniston"},{"name":"Skateboard Graveyard","count":8,"group":"Christina Moreno","linkCount":8,"label":"Skateboard Graveyard","shortName":"Skateboard Graveyard"},{"name":"Christina Moreno","count":1,"group":"Christina Moreno","linkCount":1,"label":"Christina Moreno","shortName":"Christina Moreno"},{"name":"DiscoBasement","count":8,"group":"Claire Smithney","linkCount":8,"label":"DiscoBasement","shortName":"DiscoBasement"},{"name":"Claire Smithney","count":3,"group":"Claire Smithney","linkCount":3,"label":"Claire Smithney","shortName":"Claire Smithney"},{"name":"Clare Cashen","count":1,"group":"Clare Cashen","linkCount":1,"label":"Clare Cashen","shortName":"Clare Cashen"},{"name":"GROVE","count":9,"group":"Dan Burke","linkCount":9,"label":"GROVE","shortName":"GROVE"},{"name":"Dan Burke","count":1,"group":"Dan Burke","linkCount":1,"label":"Dan Burke","shortName":"Dan Burke"},{"name":"Bar Maidz","count":1,"group":"Danielle Andruskiwec","linkCount":1,"label":"Bar Maidz","shortName":"Bar Maidz"},{"name":"Danielle Andruskiwec","count":6,"group":"Danielle Andruskiwec","linkCount":6,"label":"Danielle Andruskiwec","shortName":"Danielle Andruskiwec"},{"name":"Bistany's Mysteries","count":3,"group":"Danielle Andruskiwec","linkCount":3,"label":"Bistany's Mysteries","shortName":"Bistany's Mysteries"},{"name":"Cuddle Party","count":2,"group":"Danielle Andruskiwec","linkCount":2,"label":"Cuddle Party","shortName":"Cuddle Party"},{"name":"Electric Muffin","count":1,"group":"Danielle Andruskiwec","linkCount":1,"label":"Electric Muffin","shortName":"Electric Muffin"},{"name":"Beat Box","count":1,"group":"David Morse","linkCount":1,"label":"Beat Box","shortName":"Beat Box"},{"name":"David Morse","count":3,"group":"David Morse","linkCount":3,"label":"David Morse","shortName":"David Morse"},{"name":"Murder Toad","count":2,"group":"David Morse","linkCount":2,"label":"Murder Toad","shortName":"Murder Toad"},{"name":"The Whale and the Porpoise","count":3,"group":"David Morse","linkCount":3,"label":"The Whale and the Porpoise","shortName":"The Whale and the Porpoise"},{"name":"David + Goliath","count":2,"group":"David Thomas","linkCount":2,"label":"David + Goliath","shortName":"David + Goliath"},{"name":"David Thomas","count":4,"group":"David Thomas","linkCount":4,"label":"David Thomas","shortName":"David Thomas"},{"name":"Dennis Bruno","count":10,"group":"Dennis Bruno","linkCount":10,"label":"Dennis Bruno","shortName":"Dennis Bruno"},{"name":"Ch!co","count":3,"group":"Dennis Bruno","linkCount":3,"label":"Ch!co","shortName":"Ch!co"},{"name":"Charice The Bear","count":3,"group":"Dennis Bruno","linkCount":3,"label":"Charice The Bear","shortName":"Charice The Bear"},{"name":"Dear Diary","count":1,"group":"Dennis Bruno","linkCount":1,"label":"Dear Diary","shortName":"Dear Diary"},{"name":"Mr. Neptune & Kung Fu Bruno","count":2,"group":"Dennis Bruno","linkCount":2,"label":"Mr. Neptune & Kung Fu Bruno","shortName":"Mr. Neptune & Kung Fu Bruno"},{"name":"Twin Creeks","count":1,"group":"Dennis Bruno","linkCount":1,"label":"Twin Creeks","shortName":"Twin Creeks"},{"name":"Devin Quinlan","count":12,"group":"Devin Quinlan","linkCount":12,"label":"Devin Quinlan","shortName":"Devin Quinlan"},{"name":"Full Leather Jacket","count":1,"group":"Devin Quinlan","linkCount":1,"label":"Full Leather Jacket","shortName":"Full Leather Jacket"},{"name":"Improvised Reunion Tour","count":1,"group":"Devin Quinlan","linkCount":1,"label":"Improvised Reunion Tour","shortName":"Improvised Reunion Tour"},{"name":"Poseidon","count":2,"group":"Devin Quinlan","linkCount":2,"label":"Poseidon","shortName":"Poseidon"},{"name":"Shortprov","count":2,"group":"Devin Quinlan","linkCount":2,"label":"Shortprov","shortName":"Shortprov"},{"name":"Step Into My Office","count":1,"group":"Devin Quinlan","linkCount":1,"label":"Step Into My Office","shortName":"Step Into My Office"},{"name":"Twin Marlin","count":1,"group":"Devin Quinlan","linkCount":1,"label":"Twin Marlin","shortName":"Twin Marlin"},{"name":"Whistle Whistle","count":1,"group":"Devin Quinlan","linkCount":1,"label":"Whistle Whistle","shortName":"Whistle Whistle"},{"name":"Yes Andy and The Blizz","count":1,"group":"Devin Quinlan","linkCount":1,"label":"Yes Andy and The Blizz","shortName":"Yes Andy and The Blizz"},{"name":"50V","count":2,"group":"Diana Lu","linkCount":2,"label":"50V","shortName":"50V"},{"name":"Diana Lu","count":4,"group":"Diana Lu","linkCount":4,"label":"Diana Lu","shortName":"Diana Lu"},{"name":"Nuzzy Goal","count":1,"group":"Diana Lu","linkCount":1,"label":"Nuzzy Goal","shortName":"Nuzzy Goal"},{"name":"Wombat","count":1,"group":"Diana Lu","linkCount":1,"label":"Wombat","shortName":"Wombat"},{"name":"Drew Bligh","count":1,"group":"Drew Bligh","linkCount":1,"label":"Drew Bligh","shortName":"Drew Bligh"},{"name":"Drew Eskenazi","count":1,"group":"Drew Eskenazi","linkCount":1,"label":"Drew Eskenazi","shortName":"Drew Eskenazi"},{"name":"Emily Laverdiere","count":1,"group":"Emily Laverdiere","linkCount":1,"label":"Emily Laverdiere","shortName":"Emily Laverdiere"},{"name":"Danger Stranger","count":1,"group":"Emily Shire","linkCount":1,"label":"Danger Stranger","shortName":"Danger Stranger"},{"name":"Emily Shire","count":4,"group":"Emily Shire","linkCount":4,"label":"Emily Shire","shortName":"Emily Shire"},{"name":"Lifetime Improvised Movie","count":1,"group":"Emily Shire","linkCount":1,"label":"Lifetime Improvised Movie","shortName":"Lifetime Improvised Movie"},{"name":"Emily Stone","count":1,"group":"Emily Stone","linkCount":1,"label":"Emily Stone","shortName":"Emily Stone"},{"name":"Eric Frieden","count":2,"group":"Eric Frieden","linkCount":2,"label":"Eric Frieden","shortName":"Eric Frieden"},{"name":"Abra Cadaver","count":1,"group":"Eric Victor","linkCount":1,"label":"Abra Cadaver","shortName":"Abra Cadaver"},{"name":"Eric Victor","count":5,"group":"Eric Victor","linkCount":5,"label":"Eric Victor","shortName":"Eric Victor"},{"name":"Garbagetown","count":1,"group":"Eric Victor","linkCount":1,"label":"Garbagetown","shortName":"Garbagetown"},{"name":"Strangelove","count":2,"group":"Eric Victor","linkCount":2,"label":"Strangelove","shortName":"Strangelove"},{"name":"Francesca Villa","count":3,"group":"Francesca Villa","linkCount":3,"label":"Francesca Villa","shortName":"Francesca Villa"},{"name":"Girlfriend Material","count":2,"group":"Francesca Villa","linkCount":2,"label":"Girlfriend Material","shortName":"Girlfriend Material"},{"name":"Ian Dyer","count":1,"group":"Ian Dyer","linkCount":1,"label":"Ian Dyer","shortName":"Ian Dyer"},{"name":"Jack McNamara","count":1,"group":"Jack McNamara","linkCount":1,"label":"Jack McNamara","shortName":"Jack McNamara"},{"name":"Jane Ottensmeyer","count":1,"group":"Jane Ottensmeyer","linkCount":1,"label":"Jane Ottensmeyer","shortName":"Jane Ottensmeyer"},{"name":"Jeff Miller","count":1,"group":"Jeff Miller","linkCount":1,"label":"Jeff Miller","shortName":"Jeff Miller"},{"name":"Buffyprov","count":7,"group":"Jess Salpietro","linkCount":7,"label":"Buffyprov","shortName":"Buffyprov"},{"name":"Jess Salpietro","count":2,"group":"Jess Salpietro","linkCount":2,"label":"Jess Salpietro","shortName":"Jess Salpietro"},{"name":"Jo Galvin","count":1,"group":"Jo Galvin","linkCount":1,"label":"Jo Galvin","shortName":"Jo Galvin"},{"name":"Jo Sulin","count":1,"group":"Jo Sulin","linkCount":1,"label":"Jo Sulin","shortName":"Jo Sulin"},{"name":"Joe Creedon","count":1,"group":"Joe Creedon","linkCount":1,"label":"Joe Creedon","shortName":"Joe Creedon"},{"name":"Joe Gels","count":7,"group":"Joe Gels","linkCount":7,"label":"Joe Gels","shortName":"Joe Gels"},{"name":"Liquid Fun","count":1,"group":"Joe Gels","linkCount":1,"label":"Liquid Fun","shortName":"Liquid Fun"},{"name":"Yellow Submarine Improv Troupe","count":1,"group":"Joe Gels","linkCount":1,"label":"Yellow Submarine Improv Troupe","shortName":"Yellow Submarine Improv Troupe"},{"name":"Jonah Connally","count":1,"group":"Jonah Connally","linkCount":1,"label":"Jonah Connally","shortName":"Jonah Connally"},{"name":"Jordan Warsoff","count":1,"group":"Jordan Warsoff","linkCount":1,"label":"Jordan Warsoff","shortName":"Jordan Warsoff"},{"name":"Juliet Tripaldi","count":1,"group":"Juliet Tripaldi","linkCount":1,"label":"Juliet Tripaldi","shortName":"Juliet Tripaldi"},{"name":"Kaitlin Buckley","count":1,"group":"Kaitlin Buckley","linkCount":1,"label":"Kaitlin Buckley","shortName":"Kaitlin Buckley"},{"name":"Kate Hopkins","count":4,"group":"Kate Hopkins","linkCount":4,"label":"Kate Hopkins","shortName":"Kate Hopkins"},{"name":"Lillith Fair","count":1,"group":"Kate Hopkins","linkCount":1,"label":"Lillith Fair","shortName":"Lillith Fair"},{"name":"Kelsey Lawler","count":1,"group":"Kelsey Lawler","linkCount":1,"label":"Kelsey Lawler","shortName":"Kelsey Lawler"},{"name":"Kenny Gray","count":1,"group":"Kenny Gray","linkCount":1,"label":"Kenny Gray","shortName":"Kenny Gray"},{"name":"Kristina Staplefield","count":1,"group":"Kristina Staplefield","linkCount":1,"label":"Kristina Staplefield","shortName":"Kristina Staplefield"},{"name":"Laura Burns","count":1,"group":"Laura Burns","linkCount":1,"label":"Laura Burns","shortName":"Laura Burns"},{"name":"Laura Clark","count":1,"group":"Laura Clark","linkCount":1,"label":"Laura Clark","shortName":"Laura Clark"},{"name":"Laura Merli","count":1,"group":"Laura Merli","linkCount":1,"label":"Laura Merli","shortName":"Laura Merli"},{"name":"Lauren Magnuson","count":1,"group":"Lauren Magnuson","linkCount":1,"label":"Lauren Magnuson","shortName":"Lauren Magnuson"},{"name":"Lauren Powers","count":1,"group":"Lauren Powers","linkCount":1,"label":"Lauren Powers","shortName":"Lauren Powers"},{"name":"5 Years of Summer","count":1,"group":"Lauren Robinson","linkCount":1,"label":"5 Years of Summer","shortName":"5 Years of Summer"},{"name":"Lauren Robinson","count":6,"group":"Lauren Robinson","linkCount":6,"label":"Lauren Robinson","shortName":"Lauren Robinson"},{"name":"Bigfoot","count":2,"group":"Lauren Robinson","linkCount":2,"label":"Bigfoot","shortName":"Bigfoot"},{"name":"MIC: Musical Improv Cast","count":1,"group":"Lauren Robinson","linkCount":1,"label":"MIC: Musical Improv Cast","shortName":"MIC: Musical Improv Cast"},{"name":"Lena Prickett","count":1,"group":"Lena Prickett","linkCount":1,"label":"Lena Prickett","shortName":"Lena Prickett"},{"name":"Liz Jukovsky","count":1,"group":"Liz Jukovsky","linkCount":1,"label":"Liz Jukovsky","shortName":"Liz Jukovsky"},{"name":"Luke Bruneaux","count":2,"group":"Luke Bruneaux","linkCount":2,"label":"Luke Bruneaux","shortName":"Luke Bruneaux"},{"name":"Margaret Hoffman","count":1,"group":"Margaret Hoffman","linkCount":1,"label":"Margaret Hoffman","shortName":"Margaret Hoffman"},{"name":"Marianne Smith","count":1,"group":"Marianne Smith","linkCount":1,"label":"Marianne Smith","shortName":"Marianne Smith"},{"name":"Mark Stoughton","count":1,"group":"Mark Stoughton","linkCount":1,"label":"Mark Stoughton","shortName":"Mark Stoughton"},{"name":"Mary Coffelt","count":1,"group":"Mary Coffelt","linkCount":1,"label":"Mary Coffelt","shortName":"Mary Coffelt"},{"name":"Matt Hacker","count":2,"group":"Matt Hacker","linkCount":2,"label":"Matt Hacker","shortName":"Matt Hacker"},{"name":"Matt Pina","count":2,"group":"Matt Pina","linkCount":2,"label":"Matt Pina","shortName":"Matt Pina"},{"name":"Matt Taylor","count":1,"group":"Matt Taylor","linkCount":1,"label":"Matt Taylor","shortName":"Matt Taylor"},{"name":"Matthew DeNardo","count":2,"group":"Matthew DeNardo","linkCount":2,"label":"Matthew DeNardo","shortName":"Matthew DeNardo"},{"name":"Max Kreisky","count":14,"group":"Max Kreisky","linkCount":14,"label":"Max Kreisky","shortName":"Max Kreisky"},{"name":"D!saster","count":2,"group":"Max Kreisky","linkCount":2,"label":"D!saster","shortName":"D!saster"},{"name":"Follow Me!","count":1,"group":"Max Kreisky","linkCount":1,"label":"Follow Me!","shortName":"Follow Me!"},{"name":"Improv History","count":1,"group":"Max Kreisky","linkCount":1,"label":"Improv History","shortName":"Improv History"},{"name":"Improvised Life of a Man Named Jack","count":1,"group":"Max Kreisky","linkCount":1,"label":"Improvised Life of a Man Named Jack","shortName":"Improvised Life of a Man Named Jack"},{"name":"Lightning Harold","count":1,"group":"Max Kreisky","linkCount":1,"label":"Lightning Harold","shortName":"Lightning Harold"},{"name":"Magic: The Gathering: The Show","count":2,"group":"Max Kreisky","linkCount":2,"label":"Magic: The Gathering: The Show","shortName":"Magic: The Gathering: The Show"},{"name":"Max and Marc are Very Popular","count":1,"group":"Max Kreisky","linkCount":1,"label":"Max and Marc are Very Popular","shortName":"Max and Marc are Very Popular"},{"name":"The Harmondo","count":1,"group":"Max Kreisky","linkCount":1,"label":"The Harmondo","shortName":"The Harmondo"},{"name":"The Last Wasp","count":1,"group":"Max Kreisky","linkCount":1,"label":"The Last Wasp","shortName":"The Last Wasp"},{"name":"Viceroy","count":2,"group":"Max Kreisky","linkCount":2,"label":"Viceroy","shortName":"Viceroy"},{"name":"Don't Read the Comments!","count":1,"group":"Maya Bialik","linkCount":1,"label":"Don't Read the Comments!","shortName":"Don't Read the Comments!"},{"name":"Maya Bialik","count":9,"group":"Maya Bialik","linkCount":9,"label":"Maya Bialik","shortName":"Maya Bialik"},{"name":"First Impact","count":2,"group":"Maya Bialik","linkCount":2,"label":"First Impact","shortName":"First Impact"},{"name":"Love Me Tinder","count":2,"group":"Maya Bialik","linkCount":2,"label":"Love Me Tinder","shortName":"Love Me Tinder"},{"name":"Moonbounce Command","count":1,"group":"Maya Bialik","linkCount":1,"label":"Moonbounce Command","shortName":"Moonbounce Command"},{"name":"The Improvised Life of Jack","count":1,"group":"Maya Bialik","linkCount":1,"label":"The Improvised Life of Jack","shortName":"The Improvised Life of Jack"},{"name":"Yes Anderson","count":2,"group":"Maya Bialik","linkCount":2,"label":"Yes Anderson","shortName":"Yes Anderson"},{"name":"Meg DiMaggio","count":1,"group":"Meg DiMaggio","linkCount":1,"label":"Meg DiMaggio","shortName":"Meg DiMaggio"},{"name":"Meg Sinick","count":6,"group":"Meg Sinick","linkCount":6,"label":"Meg Sinick","shortName":"Meg Sinick"},{"name":"Hooverville","count":1,"group":"Meg Sinick","linkCount":1,"label":"Hooverville","shortName":"Hooverville"},{"name":"Mash:  The Game","count":1,"group":"Meg Sinick","linkCount":1,"label":"Mash:  The Game","shortName":"Mash:  The Game"},{"name":"Michael Motola-Barnes","count":1,"group":"Michael Motola-Barnes","linkCount":1,"label":"Michael Motola-Barnes","shortName":"Michael Motola-Barnes"},{"name":"Michael Smith","count":1,"group":"Michael Smith","linkCount":1,"label":"Michael Smith","shortName":"Michael Smith"},{"name":"Michael Spencer","count":1,"group":"Michael Spencer","linkCount":1,"label":"Michael Spencer","shortName":"Michael Spencer"},{"name":"Michael Trainor","count":6,"group":"Michael Trainor","linkCount":6,"label":"Michael Trainor","shortName":"Michael Trainor"},{"name":"Ghost Logic","count":1,"group":"Michael Trainor","linkCount":1,"label":"Ghost Logic","shortName":"Ghost Logic"},{"name":"Kendra's Special Brunch","count":1,"group":"Michael Trainor","linkCount":1,"label":"Kendra's Special Brunch","shortName":"Kendra's Special Brunch"},{"name":"M.A.S.H. (as opposed to MASH)","count":1,"group":"Michael Trainor","linkCount":1,"label":"M.A.S.H. (as opposed to MASH)","shortName":"M.A.S.H. (as opposed to MASH)"},{"name":"Michelle Mcnulty","count":1,"group":"Michelle Mcnulty","linkCount":1,"label":"Michelle Mcnulty","shortName":"Michelle Mcnulty"},{"name":"Mike Cox","count":3,"group":"Mike Cox","linkCount":3,"label":"Mike Cox","shortName":"Mike Cox"},{"name":"Tiny Mustard","count":1,"group":"Mike Cox","linkCount":1,"label":"Tiny Mustard","shortName":"Tiny Mustard"},{"name":"Mike Lovett","count":1,"group":"Mike Lovett","linkCount":1,"label":"Mike Lovett","shortName":"Mike Lovett"},{"name":"Mike Preble","count":2,"group":"Mike Preble","linkCount":2,"label":"Mike Preble","shortName":"Mike Preble"},{"name":"Mike Trainor","count":1,"group":"Mike Trainor","linkCount":1,"label":"Mike Trainor","shortName":"Mike Trainor"},{"name":"Elderberry Jam Improv","count":1,"group":"Miki Manting","linkCount":1,"label":"Elderberry Jam Improv","shortName":"Elderberry Jam Improv"},{"name":"Miki Manting","count":1,"group":"Miki Manting","linkCount":1,"label":"Miki Manting","shortName":"Miki Manting"},{"name":"Molly Bourque","count":1,"group":"Molly Bourque","linkCount":1,"label":"Molly Bourque","shortName":"Molly Bourque"},{"name":"Molly Brenner","count":1,"group":"Molly Brenner","linkCount":1,"label":"Molly Brenner","shortName":"Molly Brenner"},{"name":"Natalie Tosh","count":1,"group":"Natalie Tosh","linkCount":1,"label":"Natalie Tosh","shortName":"Natalie Tosh"},{"name":"Barnum","count":1,"group":"Nate Lopez","linkCount":1,"label":"Barnum","shortName":"Barnum"},{"name":"Nate Lopez","count":12,"group":"Nate Lopez","linkCount":12,"label":"Nate Lopez","shortName":"Nate Lopez"},{"name":"Bring Your Own Improv","count":1,"group":"Nate Lopez","linkCount":1,"label":"Bring Your Own Improv","shortName":"Bring Your Own Improv"},{"name":"Frisky Disco","count":1,"group":"Nate Lopez","linkCount":1,"label":"Frisky Disco","shortName":"Frisky Disco"},{"name":"Funeral","count":1,"group":"Nate Lopez","linkCount":1,"label":"Funeral","shortName":"Funeral"},{"name":"MASH","count":1,"group":"Nate Lopez","linkCount":1,"label":"MASH","shortName":"MASH"},{"name":"PROM","count":1,"group":"Nate Lopez","linkCount":1,"label":"PROM","shortName":"PROM"},{"name":"Two Fat Guys and a Mexican","count":1,"group":"Nate Lopez","linkCount":1,"label":"Two Fat Guys and a Mexican","shortName":"Two Fat Guys and a Mexican"},{"name":"Wedding","count":1,"group":"Nate Lopez","linkCount":1,"label":"Wedding","shortName":"Wedding"},{"name":"Weekday Brunch","count":1,"group":"Nate Lopez","linkCount":1,"label":"Weekday Brunch","shortName":"Weekday Brunch"},{"name":"White Rabbit","count":2,"group":"Nate Lopez","linkCount":2,"label":"White Rabbit","shortName":"White Rabbit"},{"name":"agent superball","count":2,"group":"Nina Vyedin","linkCount":2,"label":"agent superball","shortName":"agent superball"},{"name":"Nina Vyedin","count":3,"group":"Nina Vyedin","linkCount":3,"label":"Nina Vyedin","shortName":"Nina Vyedin"},{"name":"Bearskin Rug","count":2,"group":"Nina Vyedin","linkCount":2,"label":"Bearskin Rug","shortName":"Bearskin Rug"},{"name":"Noah Pestana","count":7,"group":"Noah Pestana","linkCount":7,"label":"Noah Pestana","shortName":"Noah Pestana"},{"name":"Assorted Birds","count":1,"group":"Noah Pestana","linkCount":1,"label":"Assorted Birds","shortName":"Assorted Birds"},{"name":"Noel Naczi","count":1,"group":"Noel Naczi","linkCount":1,"label":"Noel Naczi","shortName":"Noel Naczi"},{"name":"Padraic O'Connor","count":2,"group":"Padraic O'Connor","linkCount":2,"label":"Padraic O'Connor","shortName":"Padraic O'Connor"},{"name":"Pat Kearnan","count":3,"group":"Pat Kearnan","linkCount":3,"label":"Pat Kearnan","shortName":"Pat Kearnan"},{"name":"Peter Overzet","count":1,"group":"Peter Overzet","linkCount":1,"label":"Peter Overzet","shortName":"Peter Overzet"},{"name":"Priya Shanmugam","count":2,"group":"Priya Shanmugam","linkCount":2,"label":"Priya Shanmugam","shortName":"Priya Shanmugam"},{"name":"8th Grade Field Trip","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"8th Grade Field Trip","shortName":"8th Grade Field Trip"},{"name":"Rachel Jane Andelman","count":22,"group":"Rachel Jane Andelman","linkCount":22,"label":"Rachel Jane Andelman","shortName":"Rachel Jane Andelman"},{"name":"AB Chemistry","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"AB Chemistry","shortName":"AB Chemistry"},{"name":"Before Bed","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"Before Bed","shortName":"Before Bed"},{"name":"Boom Xanadu","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"Boom Xanadu","shortName":"Boom Xanadu"},{"name":"Buckley & Andelman","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"Buckley & Andelman","shortName":"Buckley & Andelman"},{"name":"Deathtrap","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"Deathtrap","shortName":"Deathtrap"},{"name":"Gloria Steinem","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"Gloria Steinem","shortName":"Gloria Steinem"},{"name":"It Happened In The Lab","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"It Happened In The Lab","shortName":"It Happened In The Lab"},{"name":"NorthClaw","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"NorthClaw","shortName":"NorthClaw"},{"name":"Puberty","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"Puberty","shortName":"Puberty"},{"name":"Russian for Elephant","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"Russian for Elephant","shortName":"Russian for Elephant"},{"name":"Scandalberg","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"Scandalberg","shortName":"Scandalberg"},{"name":"Stagecoach","count":1,"group":"Rachel Jane Andelman","linkCount":1,"label":"Stagecoach","shortName":"Stagecoach"},{"name":"True Defective","count":3,"group":"Rachel Jane Andelman","linkCount":3,"label":"True Defective","shortName":"True Defective"},{"name":"Russell Sickinger","count":2,"group":"Russell Sickinger","linkCount":2,"label":"Russell Sickinger","shortName":"Russell Sickinger"},{"name":"Ryan Dalley","count":1,"group":"Ryan Dalley","linkCount":1,"label":"Ryan Dalley","shortName":"Ryan Dalley"},{"name":"Sara Teague","count":2,"group":"Sara Teague","linkCount":2,"label":"Sara Teague","shortName":"Sara Teague"},{"name":"Sarah Pelrin","count":2,"group":"Sarah Pelrin","linkCount":2,"label":"Sarah Pelrin","shortName":"Sarah Pelrin"},{"name":"Seydi Sy","count":1,"group":"Seydi Sy","linkCount":1,"label":"Seydi Sy","shortName":"Seydi Sy"},{"name":"Shane Tully","count":1,"group":"Shane Tully","linkCount":1,"label":"Shane Tully","shortName":"Shane Tully"},{"name":"Bearcats","count":1,"group":"Shannon Connolly","linkCount":1,"label":"Bearcats","shortName":"Bearcats"},{"name":"Shannon Connolly","count":10,"group":"Shannon Connolly","linkCount":10,"label":"Shannon Connolly","shortName":"Shannon Connolly"},{"name":"Big Bang","count":1,"group":"Shannon Connolly","linkCount":1,"label":"Big Bang","shortName":"Big Bang"},{"name":"Camp","count":1,"group":"Shannon Connolly","linkCount":1,"label":"Camp","shortName":"Camp"},{"name":"Improv Asylum NXT","count":1,"group":"Shannon Connolly","linkCount":1,"label":"Improv Asylum NXT","shortName":"Improv Asylum NXT"},{"name":"The Fury","count":1,"group":"Shannon Connolly","linkCount":1,"label":"The Fury","shortName":"The Fury"},{"name":"Three Hole Punch","count":1,"group":"Shannon Connolly","linkCount":1,"label":"Three Hole Punch","shortName":"Three Hole Punch"},{"name":"Shiyanbade Animashaun","count":1,"group":"Shiyanbade Animashaun","linkCount":1,"label":"Shiyanbade Animashaun","shortName":"Shiyanbade Animashaun"},{"name":"Skim Kimball","count":1,"group":"Skim Kimball","linkCount":1,"label":"Skim Kimball","shortName":"Skim Kimball"},{"name":"Steve Holden","count":1,"group":"Steve Holden","linkCount":1,"label":"Steve Holden","shortName":"Steve Holden"},{"name":"Steve Marotta","count":1,"group":"Steve Marotta","linkCount":1,"label":"Steve Marotta","shortName":"Steve Marotta"},{"name":"Sumeet Sarin","count":13,"group":"Sumeet Sarin","linkCount":13,"label":"Sumeet Sarin","shortName":"Sumeet Sarin"},{"name":"54Forty","count":1,"group":"Sumeet Sarin","linkCount":1,"label":"54Forty","shortName":"54Forty"},{"name":"Eddy","count":1,"group":"Sumeet Sarin","linkCount":1,"label":"Eddy","shortName":"Eddy"},{"name":"Lois and Lois","count":1,"group":"Sumeet Sarin","linkCount":1,"label":"Lois and Lois","shortName":"Lois and Lois"},{"name":"Oregon Fail","count":1,"group":"Sumeet Sarin","linkCount":1,"label":"Oregon Fail","shortName":"Oregon Fail"},{"name":"Taylor Cotter","count":17,"group":"Taylor Cotter","linkCount":17,"label":"Taylor Cotter","shortName":"Taylor Cotter"},{"name":"Dream Phone: Whose Got A Crush on You","count":1,"group":"Taylor Cotter","linkCount":1,"label":"Dream Phone: Whose Got A Crush on You","shortName":"Dream Phone: Whose Got A Crush on You"},{"name":"ImprovBoston Holiday Spectacular","count":1,"group":"Taylor Cotter","linkCount":1,"label":"ImprovBoston Holiday Spectacular","shortName":"ImprovBoston Holiday Spectacular"},{"name":"Teddy Myers","count":2,"group":"Teddy Myers","linkCount":2,"label":"Teddy Myers","shortName":"Teddy Myers"},{"name":"Tim Hannafin","count":1,"group":"Tim Hannafin","linkCount":1,"label":"Tim Hannafin","shortName":"Tim Hannafin"},{"name":"Tim Lanning","count":1,"group":"Tim Lanning","linkCount":1,"label":"Tim Lanning","shortName":"Tim Lanning"},{"name":"Tim O'Brien","count":1,"group":"Tim O'Brien","linkCount":1,"label":"Tim O'Brien","shortName":"Tim O'Brien"},{"name":"Vanessa Lee","count":1,"group":"Vanessa Lee","linkCount":1,"label":"Vanessa Lee","shortName":"Vanessa Lee"},{"name":"Will Gianetta","count":2,"group":"Will Gianetta","linkCount":2,"label":"Will Gianetta","shortName":"Will Gianetta"} ],"links":[{"source":0,"target":1,"depth":7,"count":1},{"source":2,"target":3,"depth":7,"count":1},{"source":4,"target":5,"depth":7,"count":1},{"source":6,"target":5,"depth":7,"count":1},{"source":7,"target":5,"depth":7,"count":1},{"source":8,"target":5,"depth":7,"count":1},{"source":9,"target":10,"depth":7,"count":1},{"source":11,"target":12,"depth":7,"count":1},{"source":13,"target":14,"depth":7,"count":1},{"source":15,"target":14,"depth":7,"count":1},{"source":16,"target":14,"depth":7,"count":1},{"source":17,"target":14,"depth":7,"count":1},{"source":18,"target":14,"depth":7,"count":1},{"source":19,"target":14,"depth":7,"count":1},{"source":20,"target":14,"depth":7,"count":1},{"source":21,"target":14,"depth":7,"count":1},{"source":22,"target":14,"depth":7,"count":1},{"source":23,"target":24,"depth":7,"count":1},{"source":4,"target":24,"depth":7,"count":1},{"source":25,"target":24,"depth":7,"count":1},{"source":26,"target":24,"depth":7,"count":1},{"source":27,"target":24,"depth":7,"count":1},{"source":28,"target":24,"depth":7,"count":1},{"source":29,"target":24,"depth":7,"count":1},{"source":30,"target":24,"depth":7,"count":1},{"source":31,"target":24,"depth":7,"count":1},{"source":32,"target":24,"depth":7,"count":1},{"source":33,"target":24,"depth":7,"count":1},{"source":34,"target":35,"depth":7,"count":1},{"source":36,"target":37,"depth":7,"count":1},{"source":38,"target":37,"depth":7,"count":1},{"source":39,"target":37,"depth":7,"count":1},{"source":23,"target":40,"depth":7,"count":1},{"source":26,"target":40,"depth":7,"count":1},{"source":41,"target":40,"depth":7,"count":1},{"source":42,"target":40,"depth":7,"count":1},{"source":26,"target":43,"depth":7,"count":1},{"source":42,"target":43,"depth":7,"count":1},{"source":44,"target":45,"depth":7,"count":1},{"source":46,"target":45,"depth":7,"count":1},{"source":47,"target":45,"depth":7,"count":1},{"source":48,"target":45,"depth":7,"count":1},{"source":49,"target":45,"depth":7,"count":1},{"source":50,"target":45,"depth":7,"count":1},{"source":27,"target":45,"depth":7,"count":1},{"source":51,"target":45,"depth":7,"count":1},{"source":52,"target":45,"depth":7,"count":1},{"source":53,"target":45,"depth":7,"count":1},{"source":54,"target":45,"depth":7,"count":1},{"source":55,"target":45,"depth":7,"count":1},{"source":56,"target":45,"depth":7,"count":1},{"source":57,"target":45,"depth":7,"count":1},{"source":58,"target":45,"depth":7,"count":1},{"source":59,"target":45,"depth":7,"count":1},{"source":60,"target":45,"depth":7,"count":1},{"source":61,"target":45,"depth":7,"count":1},{"source":62,"target":45,"depth":7,"count":1},{"source":31,"target":45,"depth":7,"count":1},{"source":63,"target":45,"depth":7,"count":1},{"source":64,"target":45,"depth":7,"count":1},{"source":65,"target":45,"depth":7,"count":1},{"source":66,"target":45,"depth":7,"count":1},{"source":67,"target":45,"depth":7,"count":1},{"source":68,"target":45,"depth":7,"count":1},{"source":69,"target":70,"depth":7,"count":1},{"source":71,"target":70,"depth":7,"count":1},{"source":27,"target":70,"depth":7,"count":1},{"source":72,"target":70,"depth":7,"count":1},{"source":73,"target":70,"depth":7,"count":1},{"source":74,"target":70,"depth":7,"count":1},{"source":75,"target":70,"depth":7,"count":1},{"source":76,"target":70,"depth":7,"count":1},{"source":77,"target":70,"depth":7,"count":1},{"source":78,"target":70,"depth":7,"count":1},{"source":79,"target":70,"depth":7,"count":1},{"source":21,"target":70,"depth":7,"count":1},{"source":80,"target":70,"depth":7,"count":1},{"source":81,"target":70,"depth":7,"count":1},{"source":82,"target":70,"depth":7,"count":1},{"source":83,"target":70,"depth":7,"count":1},{"source":84,"target":70,"depth":7,"count":1},{"source":85,"target":86,"depth":7,"count":1},{"source":27,"target":86,"depth":7,"count":1},{"source":87,"target":86,"depth":7,"count":1},{"source":19,"target":86,"depth":7,"count":1},{"source":88,"target":86,"depth":7,"count":1},{"source":89,"target":86,"depth":7,"count":1},{"source":90,"target":86,"depth":7,"count":1},{"source":91,"target":92,"depth":7,"count":1},{"source":93,"target":94,"depth":7,"count":1},{"source":87,"target":94,"depth":7,"count":1},{"source":34,"target":94,"depth":7,"count":1},{"source":95,"target":94,"depth":7,"count":1},{"source":96,"target":94,"depth":7,"count":1},{"source":97,"target":94,"depth":7,"count":1},{"source":2,"target":94,"depth":7,"count":1},{"source":98,"target":94,"depth":7,"count":1},{"source":34,"target":99,"depth":7,"count":1},{"source":100,"target":99,"depth":7,"count":1},{"source":101,"target":99,"depth":7,"count":1},{"source":102,"target":99,"depth":7,"count":1},{"source":91,"target":103,"depth":7,"count":1},{"source":104,"target":105,"depth":7,"count":1},{"source":0,"target":106,"depth":7,"count":1},{"source":107,"target":108,"depth":7,"count":1},{"source":109,"target":110,"depth":7,"count":1},{"source":111,"target":110,"depth":7,"count":1},{"source":23,"target":112,"depth":7,"count":1},{"source":23,"target":113,"depth":7,"count":1},{"source":6,"target":113,"depth":7,"count":1},{"source":114,"target":113,"depth":7,"count":1},{"source":115,"target":113,"depth":7,"count":1},{"source":11,"target":113,"depth":7,"count":1},{"source":116,"target":113,"depth":7,"count":1},{"source":102,"target":113,"depth":7,"count":1},{"source":117,"target":118,"depth":7,"count":1},{"source":119,"target":120,"depth":7,"count":1},{"source":87,"target":120,"depth":7,"count":1},{"source":82,"target":120,"depth":7,"count":1},{"source":104,"target":121,"depth":7,"count":1},{"source":122,"target":123,"depth":7,"count":1},{"source":124,"target":125,"depth":7,"count":1},{"source":126,"target":125,"depth":7,"count":1},{"source":4,"target":125,"depth":7,"count":1},{"source":127,"target":125,"depth":7,"count":1},{"source":128,"target":125,"depth":7,"count":1},{"source":104,"target":125,"depth":7,"count":1},{"source":129,"target":130,"depth":7,"count":1},{"source":131,"target":130,"depth":7,"count":1},{"source":132,"target":130,"depth":7,"count":1},{"source":133,"target":134,"depth":7,"count":1},{"source":26,"target":134,"depth":7,"count":1},{"source":41,"target":134,"depth":7,"count":1},{"source":42,"target":134,"depth":7,"count":1},{"source":126,"target":135,"depth":7,"count":1},{"source":107,"target":135,"depth":7,"count":1},{"source":136,"target":135,"depth":7,"count":1},{"source":137,"target":135,"depth":7,"count":1},{"source":4,"target":135,"depth":7,"count":1},{"source":138,"target":135,"depth":7,"count":1},{"source":87,"target":135,"depth":7,"count":1},{"source":104,"target":135,"depth":7,"count":1},{"source":139,"target":135,"depth":7,"count":1},{"source":140,"target":135,"depth":7,"count":1},{"source":126,"target":141,"depth":7,"count":1},{"source":142,"target":141,"depth":7,"count":1},{"source":122,"target":141,"depth":7,"count":1},{"source":143,"target":141,"depth":7,"count":1},{"source":9,"target":141,"depth":7,"count":1},{"source":144,"target":141,"depth":7,"count":1},{"source":42,"target":141,"depth":7,"count":1},{"source":145,"target":141,"depth":7,"count":1},{"source":146,"target":141,"depth":7,"count":1},{"source":147,"target":141,"depth":7,"count":1},{"source":148,"target":141,"depth":7,"count":1},{"source":149,"target":141,"depth":7,"count":1},{"source":150,"target":151,"depth":7,"count":1},{"source":104,"target":151,"depth":7,"count":1},{"source":152,"target":151,"depth":7,"count":1},{"source":153,"target":151,"depth":7,"count":1},{"source":8,"target":154,"depth":7,"count":1},{"source":0,"target":155,"depth":7,"count":1},{"source":104,"target":156,"depth":7,"count":1},{"source":157,"target":158,"depth":7,"count":1},{"source":159,"target":158,"depth":7,"count":1},{"source":91,"target":158,"depth":7,"count":1},{"source":132,"target":158,"depth":7,"count":1},{"source":2,"target":160,"depth":7,"count":1},{"source":9,"target":161,"depth":7,"count":1},{"source":117,"target":161,"depth":7,"count":1},{"source":162,"target":163,"depth":7,"count":1},{"source":164,"target":163,"depth":7,"count":1},{"source":6,"target":163,"depth":7,"count":1},{"source":18,"target":163,"depth":7,"count":1},{"source":165,"target":163,"depth":7,"count":1},{"source":26,"target":166,"depth":7,"count":1},{"source":167,"target":166,"depth":7,"count":1},{"source":41,"target":166,"depth":7,"count":1},{"source":122,"target":168,"depth":7,"count":1},{"source":9,"target":169,"depth":7,"count":1},{"source":2,"target":170,"depth":7,"count":1},{"source":0,"target":171,"depth":7,"count":1},{"source":172,"target":173,"depth":7,"count":1},{"source":26,"target":173,"depth":7,"count":1},{"source":41,"target":174,"depth":7,"count":1},{"source":41,"target":175,"depth":7,"count":1},{"source":104,"target":176,"depth":7,"count":1},{"source":172,"target":177,"depth":7,"count":1},{"source":27,"target":177,"depth":7,"count":1},{"source":87,"target":177,"depth":7,"count":1},{"source":95,"target":177,"depth":7,"count":1},{"source":104,"target":177,"depth":7,"count":1},{"source":178,"target":177,"depth":7,"count":1},{"source":179,"target":177,"depth":7,"count":1},{"source":34,"target":180,"depth":7,"count":1},{"source":2,"target":181,"depth":7,"count":1},{"source":11,"target":182,"depth":7,"count":1},{"source":41,"target":183,"depth":7,"count":1},{"source":23,"target":184,"depth":7,"count":1},{"source":28,"target":184,"depth":7,"count":1},{"source":185,"target":184,"depth":7,"count":1},{"source":116,"target":184,"depth":7,"count":1},{"source":9,"target":186,"depth":7,"count":1},{"source":2,"target":187,"depth":7,"count":1},{"source":23,"target":188,"depth":7,"count":1},{"source":8,"target":189,"depth":7,"count":1},{"source":104,"target":190,"depth":7,"count":1},{"source":172,"target":191,"depth":7,"count":1},{"source":41,"target":192,"depth":7,"count":1},{"source":26,"target":193,"depth":7,"count":1},{"source":194,"target":195,"depth":7,"count":1},{"source":93,"target":195,"depth":7,"count":1},{"source":196,"target":195,"depth":7,"count":1},{"source":87,"target":195,"depth":7,"count":1},{"source":104,"target":195,"depth":7,"count":1},{"source":197,"target":195,"depth":7,"count":1},{"source":0,"target":198,"depth":7,"count":1},{"source":122,"target":199,"depth":7,"count":1},{"source":26,"target":200,"depth":7,"count":1},{"source":41,"target":200,"depth":7,"count":1},{"source":2,"target":201,"depth":7,"count":1},{"source":8,"target":202,"depth":7,"count":1},{"source":172,"target":203,"depth":7,"count":1},{"source":34,"target":204,"depth":7,"count":1},{"source":38,"target":205,"depth":7,"count":1},{"source":0,"target":205,"depth":7,"count":1},{"source":93,"target":206,"depth":7,"count":1},{"source":196,"target":206,"depth":7,"count":1},{"source":8,"target":207,"depth":7,"count":1},{"source":136,"target":208,"depth":7,"count":1},{"source":131,"target":208,"depth":7,"count":1},{"source":172,"target":209,"depth":7,"count":1},{"source":137,"target":209,"depth":7,"count":1},{"source":210,"target":209,"depth":7,"count":1},{"source":211,"target":209,"depth":7,"count":1},{"source":74,"target":209,"depth":7,"count":1},{"source":212,"target":209,"depth":7,"count":1},{"source":213,"target":209,"depth":7,"count":1},{"source":214,"target":209,"depth":7,"count":1},{"source":215,"target":209,"depth":7,"count":1},{"source":216,"target":209,"depth":7,"count":1},{"source":144,"target":209,"depth":7,"count":1},{"source":217,"target":209,"depth":7,"count":1},{"source":218,"target":209,"depth":7,"count":1},{"source":219,"target":209,"depth":7,"count":1},{"source":220,"target":221,"depth":7,"count":1},{"source":222,"target":221,"depth":7,"count":1},{"source":34,"target":221,"depth":7,"count":1},{"source":115,"target":221,"depth":7,"count":1},{"source":223,"target":221,"depth":7,"count":1},{"source":2,"target":221,"depth":7,"count":1},{"source":224,"target":221,"depth":7,"count":1},{"source":225,"target":221,"depth":7,"count":1},{"source":226,"target":221,"depth":7,"count":1},{"source":104,"target":227,"depth":7,"count":1},{"source":107,"target":228,"depth":7,"count":1},{"source":6,"target":228,"depth":7,"count":1},{"source":229,"target":228,"depth":7,"count":1},{"source":104,"target":228,"depth":7,"count":1},{"source":230,"target":228,"depth":7,"count":1},{"source":0,"target":228,"depth":7,"count":1},{"source":2,"target":231,"depth":7,"count":1},{"source":8,"target":232,"depth":7,"count":1},{"source":8,"target":233,"depth":7,"count":1},{"source":107,"target":234,"depth":7,"count":1},{"source":235,"target":234,"depth":7,"count":1},{"source":7,"target":234,"depth":7,"count":1},{"source":236,"target":234,"depth":7,"count":1},{"source":237,"target":234,"depth":7,"count":1},{"source":91,"target":234,"depth":7,"count":1},{"source":172,"target":238,"depth":7,"count":1},{"source":136,"target":239,"depth":7,"count":1},{"source":139,"target":239,"depth":7,"count":1},{"source":240,"target":239,"depth":7,"count":1},{"source":91,"target":241,"depth":7,"count":1},{"source":107,"target":242,"depth":7,"count":1},{"source":104,"target":242,"depth":7,"count":1},{"source":107,"target":243,"depth":7,"count":1},{"source":244,"target":245,"depth":7,"count":1},{"source":117,"target":246,"depth":7,"count":1},{"source":9,"target":247,"depth":7,"count":1},{"source":0,"target":248,"depth":7,"count":1},{"source":249,"target":250,"depth":7,"count":1},{"source":251,"target":250,"depth":7,"count":1},{"source":87,"target":250,"depth":7,"count":1},{"source":252,"target":250,"depth":7,"count":1},{"source":253,"target":250,"depth":7,"count":1},{"source":19,"target":250,"depth":7,"count":1},{"source":254,"target":250,"depth":7,"count":1},{"source":255,"target":250,"depth":7,"count":1},{"source":256,"target":250,"depth":7,"count":1},{"source":257,"target":250,"depth":7,"count":1},{"source":258,"target":250,"depth":7,"count":1},{"source":259,"target":250,"depth":7,"count":1},{"source":260,"target":261,"depth":7,"count":1},{"source":262,"target":261,"depth":7,"count":1},{"source":132,"target":261,"depth":7,"count":1},{"source":260,"target":263,"depth":7,"count":1},{"source":264,"target":263,"depth":7,"count":1},{"source":262,"target":263,"depth":7,"count":1},{"source":36,"target":263,"depth":7,"count":1},{"source":223,"target":263,"depth":7,"count":1},{"source":91,"target":263,"depth":7,"count":1},{"source":226,"target":263,"depth":7,"count":1},{"source":8,"target":265,"depth":7,"count":1},{"source":122,"target":266,"depth":7,"count":1},{"source":9,"target":266,"depth":7,"count":1},{"source":23,"target":267,"depth":7,"count":1},{"source":26,"target":267,"depth":7,"count":1},{"source":117,"target":267,"depth":7,"count":1},{"source":119,"target":268,"depth":7,"count":1},{"source":34,"target":269,"depth":7,"count":1},{"source":117,"target":269,"depth":7,"count":1},{"source":270,"target":271,"depth":7,"count":1},{"source":272,"target":271,"depth":7,"count":1},{"source":273,"target":271,"depth":7,"count":1},{"source":274,"target":271,"depth":7,"count":1},{"source":275,"target":271,"depth":7,"count":1},{"source":137,"target":271,"depth":7,"count":1},{"source":210,"target":271,"depth":7,"count":1},{"source":276,"target":271,"depth":7,"count":1},{"source":222,"target":271,"depth":7,"count":1},{"source":277,"target":271,"depth":7,"count":1},{"source":278,"target":271,"depth":7,"count":1},{"source":215,"target":271,"depth":7,"count":1},{"source":20,"target":271,"depth":7,"count":1},{"source":279,"target":271,"depth":7,"count":1},{"source":280,"target":271,"depth":7,"count":1},{"source":21,"target":271,"depth":7,"count":1},{"source":281,"target":271,"depth":7,"count":1},{"source":282,"target":271,"depth":7,"count":1},{"source":117,"target":271,"depth":7,"count":1},{"source":283,"target":271,"depth":7,"count":1},{"source":284,"target":271,"depth":7,"count":1},{"source":219,"target":271,"depth":7,"count":1},{"source":119,"target":285,"depth":7,"count":1},{"source":117,"target":285,"depth":7,"count":1},{"source":42,"target":286,"depth":7,"count":1},{"source":122,"target":287,"depth":7,"count":1},{"source":42,"target":287,"depth":7,"count":1},{"source":119,"target":288,"depth":7,"count":1},{"source":9,"target":288,"depth":7,"count":1},{"source":91,"target":289,"depth":7,"count":1},{"source":119,"target":290,"depth":7,"count":1},{"source":291,"target":292,"depth":7,"count":1},{"source":293,"target":292,"depth":7,"count":1},{"source":294,"target":292,"depth":7,"count":1},{"source":27,"target":292,"depth":7,"count":1},{"source":295,"target":292,"depth":7,"count":1},{"source":19,"target":292,"depth":7,"count":1},{"source":296,"target":292,"depth":7,"count":1},{"source":89,"target":292,"depth":7,"count":1},{"source":297,"target":292,"depth":7,"count":1},{"source":259,"target":292,"depth":7,"count":1},{"source":91,"target":298,"depth":7,"count":1},{"source":119,"target":299,"depth":7,"count":1},{"source":2,"target":300,"depth":7,"count":1},{"source":104,"target":301,"depth":7,"count":1},{"source":150,"target":302,"depth":7,"count":1},{"source":303,"target":302,"depth":7,"count":1},{"source":13,"target":302,"depth":7,"count":1},{"source":304,"target":302,"depth":7,"count":1},{"source":122,"target":302,"depth":7,"count":1},{"source":28,"target":302,"depth":7,"count":1},{"source":305,"target":302,"depth":7,"count":1},{"source":20,"target":302,"depth":7,"count":1},{"source":306,"target":302,"depth":7,"count":1},{"source":41,"target":302,"depth":7,"count":1},{"source":165,"target":302,"depth":7,"count":1},{"source":284,"target":302,"depth":7,"count":1},{"source":98,"target":302,"depth":7,"count":1},{"source":4,"target":307,"depth":7,"count":1},{"source":127,"target":307,"depth":7,"count":1},{"source":133,"target":307,"depth":7,"count":1},{"source":308,"target":307,"depth":7,"count":1},{"source":26,"target":307,"depth":7,"count":1},{"source":27,"target":307,"depth":7,"count":1},{"source":72,"target":307,"depth":7,"count":1},{"source":167,"target":307,"depth":7,"count":1},{"source":122,"target":307,"depth":7,"count":1},{"source":104,"target":307,"depth":7,"count":1},{"source":309,"target":307,"depth":7,"count":1},{"source":9,"target":307,"depth":7,"count":1},{"source":41,"target":307,"depth":7,"count":1},{"source":42,"target":307,"depth":7,"count":1},{"source":145,"target":307,"depth":7,"count":1},{"source":117,"target":307,"depth":7,"count":1},{"source":284,"target":307,"depth":7,"count":1},{"source":23,"target":310,"depth":7,"count":1},{"source":122,"target":310,"depth":7,"count":1},{"source":119,"target":311,"depth":7,"count":1},{"source":26,"target":312,"depth":7,"count":1},{"source":104,"target":313,"depth":7,"count":1},{"source":119,"target":314,"depth":7,"count":1},{"source":172,"target":315,"depth":7,"count":1},{"source":34,"target":315,"depth":7,"count":1} ]}}};
+</script></head><body><div>Boston Improv:<strong></strong><span style="color:darslateblue;"> <small>click a node to focus</small></span><aside><small>
+   <a href='http://ramblings.mcpher.com'>ramblings.mcpher.com</a><br>
+    works best on Chrome<br> ackowledgements:<a href='http://bost.ocks.org/mike/'>Mike Bostok for d3.js</a></small>
+   </aside>
+</div>
+  <div id="chart">
+
+  </div>
+
+ </body>
+</html>
