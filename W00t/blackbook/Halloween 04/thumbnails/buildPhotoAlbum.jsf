@@ -1,0 +1,332 @@
+App.progressCountTotal = 41;
+App.progressCountCurrent = 0;
+fw.dismissBatchDialogWhenDone = true;
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/1268.jpg');
+App.progressCountCurrent = 1;
+App.batchStatusString = '1268.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1268_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1268_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1268_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1268_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1268_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1268_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/1a1b.jpg');
+App.progressCountCurrent = 2;
+App.batchStatusString = '1a1b.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1a1b_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1a1b_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1a1b_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1a1b_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1a1b_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1a1b_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/1c0f.jpg');
+App.progressCountCurrent = 3;
+App.batchStatusString = '1c0f.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1c0f_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1c0f_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1c0f_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1c0f_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1c0f_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1c0f_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/1cf8.jpg');
+App.progressCountCurrent = 4;
+App.batchStatusString = '1cf8.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1cf8_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1cf8_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/1cf8_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1cf8_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1cf8_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/1cf8_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/2060.jpg');
+App.progressCountCurrent = 5;
+App.batchStatusString = '2060.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/2060_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/2060_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/2060_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/2060_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/2060_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/2060_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/22c1.jpg');
+App.progressCountCurrent = 6;
+App.batchStatusString = '22c1.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/22c1_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/22c1_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/22c1_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/22c1_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/22c1_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/22c1_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/2d81.jpg');
+App.progressCountCurrent = 7;
+App.batchStatusString = '2d81.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/2d81_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/2d81_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/2d81_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/2d81_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/2d81_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/2d81_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/3525.jpg');
+App.progressCountCurrent = 8;
+App.batchStatusString = '3525.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/3525_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/3525_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/3525_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/3525_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/3525_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/3525_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/38da.jpg');
+App.progressCountCurrent = 9;
+App.batchStatusString = '38da.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/38da_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/38da_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/38da_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/38da_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/38da_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/38da_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/3e60.jpg');
+App.progressCountCurrent = 10;
+App.batchStatusString = '3e60.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/3e60_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/3e60_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/3e60_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/3e60_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/3e60_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/3e60_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/473c.jpg');
+App.progressCountCurrent = 11;
+App.batchStatusString = '473c.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/473c_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/473c_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/473c_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/473c_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/473c_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/473c_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/4b71.jpg');
+App.progressCountCurrent = 12;
+App.batchStatusString = '4b71.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/4b71_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/4b71_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/4b71_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/4b71_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/4b71_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/4b71_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/5122.jpg');
+App.progressCountCurrent = 13;
+App.batchStatusString = '5122.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/5122_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/5122_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/5122_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/5122_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/5122_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/5122_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/53af.jpg');
+App.progressCountCurrent = 14;
+App.batchStatusString = '53af.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/53af_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/53af_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/53af_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/53af_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/53af_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/53af_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/57da.jpg');
+App.progressCountCurrent = 15;
+App.batchStatusString = '57da.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/57da_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/57da_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/57da_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/57da_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/57da_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/57da_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/5e7a.jpg');
+App.progressCountCurrent = 16;
+App.batchStatusString = '5e7a.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/5e7a_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/5e7a_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/5e7a_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/5e7a_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/5e7a_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/5e7a_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/71e4.jpg');
+App.progressCountCurrent = 17;
+App.batchStatusString = '71e4.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/71e4_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/71e4_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/71e4_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/71e4_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/71e4_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/71e4_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/7650.jpg');
+App.progressCountCurrent = 18;
+App.batchStatusString = '7650.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/7650_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/7650_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/7650_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/7650_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/7650_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/7650_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/7e9d.jpg');
+App.progressCountCurrent = 19;
+App.batchStatusString = '7e9d.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/7e9d_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/7e9d_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/7e9d_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/7e9d_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/7e9d_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/7e9d_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/8cdc.jpg');
+App.progressCountCurrent = 20;
+App.batchStatusString = '8cdc.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/8cdc_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/8cdc_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/8cdc_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/8cdc_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/8cdc_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/8cdc_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/994b.jpg');
+App.progressCountCurrent = 21;
+App.batchStatusString = '994b.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/994b_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/994b_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/994b_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/994b_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/994b_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/994b_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/9c7b.jpg');
+App.progressCountCurrent = 22;
+App.batchStatusString = '9c7b.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/9c7b_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/9c7b_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/9c7b_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/9c7b_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/9c7b_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/9c7b_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/9cb4.jpg');
+App.progressCountCurrent = 23;
+App.batchStatusString = '9cb4.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/9cb4_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/9cb4_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/9cb4_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/9cb4_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/9cb4_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/9cb4_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/a39b.jpg');
+App.progressCountCurrent = 24;
+App.batchStatusString = 'a39b.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/a39b_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/a39b_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/a39b_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/a39b_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/a39b_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/a39b_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/b8f8.jpg');
+App.progressCountCurrent = 25;
+App.batchStatusString = 'b8f8.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/b8f8_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/b8f8_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/b8f8_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/b8f8_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/b8f8_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/b8f8_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/ccee.jpg');
+App.progressCountCurrent = 26;
+App.batchStatusString = 'ccee.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ccee_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ccee_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ccee_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ccee_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ccee_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ccee_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/dagoils.jpg');
+App.progressCountCurrent = 27;
+App.batchStatusString = 'dagoils.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/dagoils_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/dagoils_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/dagoils_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/dagoils_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/dagoils_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/dagoils_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/e113.jpg');
+App.progressCountCurrent = 28;
+App.batchStatusString = 'e113.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e113_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e113_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e113_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e113_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e113_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e113_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/e483.jpg');
+App.progressCountCurrent = 29;
+App.batchStatusString = 'e483.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e483_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e483_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e483_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e483_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e483_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e483_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/e70e.jpg');
+App.progressCountCurrent = 30;
+App.batchStatusString = 'e70e.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e70e_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e70e_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e70e_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e70e_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e70e_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e70e_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/e9d5.jpg');
+App.progressCountCurrent = 31;
+App.batchStatusString = 'e9d5.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e9d5_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e9d5_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/e9d5_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e9d5_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e9d5_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/e9d5_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/ea12.jpg');
+App.progressCountCurrent = 32;
+App.batchStatusString = 'ea12.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ea12_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ea12_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ea12_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ea12_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ea12_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ea12_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/ea70.jpg');
+App.progressCountCurrent = 33;
+App.batchStatusString = 'ea70.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ea70_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ea70_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ea70_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ea70_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ea70_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ea70_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/ec9f.jpg');
+App.progressCountCurrent = 34;
+App.batchStatusString = 'ec9f.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ec9f_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ec9f_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/ec9f_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ec9f_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ec9f_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/ec9f_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/f12c.jpg');
+App.progressCountCurrent = 35;
+App.batchStatusString = 'f12c.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f12c_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f12c_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f12c_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f12c_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f12c_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f12c_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/f1f2.jpg');
+App.progressCountCurrent = 36;
+App.batchStatusString = 'f1f2.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f1f2_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f1f2_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f1f2_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f1f2_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f1f2_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f1f2_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/f39c.jpg');
+App.progressCountCurrent = 37;
+App.batchStatusString = 'f39c.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f39c_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f39c_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f39c_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f39c_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f39c_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f39c_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/f7ab.jpg');
+App.progressCountCurrent = 38;
+App.batchStatusString = 'f7ab.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f7ab_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f7ab_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/f7ab_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f7ab_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f7ab_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/f7ab_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/foxforceall.jpg');
+App.progressCountCurrent = 39;
+App.batchStatusString = 'foxforceall.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/foxforceall_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/foxforceall_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/foxforceall_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/foxforceall_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/foxforceall_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/foxforceall_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/optimusnV.jpg');
+App.progressCountCurrent = 40;
+App.batchStatusString = 'optimusnV.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/optimusnV_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/optimusnV_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/optimusnV_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/optimusnV_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/optimusnV_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/optimusnV_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/steveaskenedy.jpg');
+App.progressCountCurrent = 41;
+App.batchStatusString = 'steveaskenedy.jpg';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/steveaskenedy_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/steveaskenedy_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/images/steveaskenedy_jpg.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/steveaskenedy_jpg.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/steveaskenedy_jpg.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Halloween 04/thumbnails/steveaskenedy_jpg.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+'done';

@@ -1,0 +1,292 @@
+App.progressCountTotal = 36;
+App.progressCountCurrent = 0;
+fw.dismissBatchDialogWhenDone = true;
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00389.JPG');
+App.progressCountCurrent = 1;
+App.batchStatusString = 'DSC00389.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00389_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00389_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00389_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00389_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00389_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00389_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00390.JPG');
+App.progressCountCurrent = 2;
+App.batchStatusString = 'DSC00390.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00390_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00390_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00390_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00390_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00390_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00390_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00391.JPG');
+App.progressCountCurrent = 3;
+App.batchStatusString = 'DSC00391.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00391_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00391_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00391_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00391_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00391_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00391_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00392.JPG');
+App.progressCountCurrent = 4;
+App.batchStatusString = 'DSC00392.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00392_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00392_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00392_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00392_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00392_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00392_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00395.JPG');
+App.progressCountCurrent = 5;
+App.batchStatusString = 'DSC00395.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00395_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00395_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00395_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00395_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00395_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00395_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00396.JPG');
+App.progressCountCurrent = 6;
+App.batchStatusString = 'DSC00396.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00396_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00396_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00396_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00396_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00396_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00396_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00397.JPG');
+App.progressCountCurrent = 7;
+App.batchStatusString = 'DSC00397.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00397_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00397_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00397_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00397_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00397_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00397_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00398.JPG');
+App.progressCountCurrent = 8;
+App.batchStatusString = 'DSC00398.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00398_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00398_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00398_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00398_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00398_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00398_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00400.JPG');
+App.progressCountCurrent = 9;
+App.batchStatusString = 'DSC00400.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00400_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00400_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00400_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00400_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00400_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00400_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00401.JPG');
+App.progressCountCurrent = 10;
+App.batchStatusString = 'DSC00401.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00401_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00401_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00401_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00401_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00401_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00401_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00403.JPG');
+App.progressCountCurrent = 11;
+App.batchStatusString = 'DSC00403.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00403_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00403_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00403_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00403_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00403_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00403_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00404.JPG');
+App.progressCountCurrent = 12;
+App.batchStatusString = 'DSC00404.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00404_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00404_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00404_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00404_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00404_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00404_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00405.JPG');
+App.progressCountCurrent = 13;
+App.batchStatusString = 'DSC00405.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00405_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00405_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00405_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00405_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00405_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00405_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00406.JPG');
+App.progressCountCurrent = 14;
+App.batchStatusString = 'DSC00406.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00406_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00406_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00406_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00406_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00406_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00406_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00407.JPG');
+App.progressCountCurrent = 15;
+App.batchStatusString = 'DSC00407.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00407_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00407_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00407_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00407_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00407_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00407_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00408.JPG');
+App.progressCountCurrent = 16;
+App.batchStatusString = 'DSC00408.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00408_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00408_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00408_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00408_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00408_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00408_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00409.JPG');
+App.progressCountCurrent = 17;
+App.batchStatusString = 'DSC00409.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00409_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00409_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00409_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00409_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00409_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00409_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00410.JPG');
+App.progressCountCurrent = 18;
+App.batchStatusString = 'DSC00410.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00410_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00410_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00410_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00410_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00410_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00410_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00411.JPG');
+App.progressCountCurrent = 19;
+App.batchStatusString = 'DSC00411.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00411_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00411_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00411_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00411_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00411_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00411_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00412.JPG');
+App.progressCountCurrent = 20;
+App.batchStatusString = 'DSC00412.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00412_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00412_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00412_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00412_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00412_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00412_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00413.JPG');
+App.progressCountCurrent = 21;
+App.batchStatusString = 'DSC00413.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00413_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00413_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00413_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00413_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00413_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00413_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00414.JPG');
+App.progressCountCurrent = 22;
+App.batchStatusString = 'DSC00414.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00414_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00414_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00414_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00414_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00414_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00414_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00415.JPG');
+App.progressCountCurrent = 23;
+App.batchStatusString = 'DSC00415.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00415_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00415_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00415_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00415_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00415_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00415_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00417.JPG');
+App.progressCountCurrent = 24;
+App.batchStatusString = 'DSC00417.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00417_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00417_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00417_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00417_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00417_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00417_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00418.JPG');
+App.progressCountCurrent = 25;
+App.batchStatusString = 'DSC00418.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00418_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00418_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00418_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00418_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00418_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00418_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00419.JPG');
+App.progressCountCurrent = 26;
+App.batchStatusString = 'DSC00419.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00419_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00419_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00419_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00419_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00419_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00419_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00422.JPG');
+App.progressCountCurrent = 27;
+App.batchStatusString = 'DSC00422.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00422_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00422_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00422_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00422_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00422_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00422_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00424.JPG');
+App.progressCountCurrent = 28;
+App.batchStatusString = 'DSC00424.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00424_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00424_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00424_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00424_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00424_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00424_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00425.JPG');
+App.progressCountCurrent = 29;
+App.batchStatusString = 'DSC00425.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00425_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00425_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00425_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00425_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00425_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00425_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00426.JPG');
+App.progressCountCurrent = 30;
+App.batchStatusString = 'DSC00426.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00426_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00426_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00426_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00426_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00426_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00426_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00427.JPG');
+App.progressCountCurrent = 31;
+App.batchStatusString = 'DSC00427.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00427_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00427_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00427_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00427_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00427_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00427_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00428.JPG');
+App.progressCountCurrent = 32;
+App.batchStatusString = 'DSC00428.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00428_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00428_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00428_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00428_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00428_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00428_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00429.JPG');
+App.progressCountCurrent = 33;
+App.batchStatusString = 'DSC00429.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00429_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00429_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00429_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00429_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00429_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00429_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00431.JPG');
+App.progressCountCurrent = 34;
+App.batchStatusString = 'DSC00431.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00431_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00431_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00431_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00431_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00431_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00431_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00434.JPG');
+App.progressCountCurrent = 35;
+App.batchStatusString = 'DSC00434.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00434_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00434_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00434_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00434_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00434_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00434_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/New Folder/DSC00435.JPG');
+App.progressCountCurrent = 36;
+App.batchStatusString = 'DSC00435.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00435_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00435_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/images/DSC00435_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00435_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00435_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/Game 7/thumbnails/DSC00435_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+'done';

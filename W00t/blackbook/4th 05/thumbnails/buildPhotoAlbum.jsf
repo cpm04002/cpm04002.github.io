@@ -1,0 +1,244 @@
+App.progressCountTotal = 30;
+App.progressCountCurrent = 0;
+fw.dismissBatchDialogWhenDone = true;
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00001.JPG');
+App.progressCountCurrent = 1;
+App.batchStatusString = 'IMG00001.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00001_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00001_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00001_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00001_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00001_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00001_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00002.JPG');
+App.progressCountCurrent = 2;
+App.batchStatusString = 'IMG00002.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00002_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00002_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00002_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00002_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00002_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00002_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00003.JPG');
+App.progressCountCurrent = 3;
+App.batchStatusString = 'IMG00003.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00003_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00003_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00003_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00003_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00003_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00003_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00004.JPG');
+App.progressCountCurrent = 4;
+App.batchStatusString = 'IMG00004.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00004_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00004_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00004_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00004_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00004_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00004_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00005.JPG');
+App.progressCountCurrent = 5;
+App.batchStatusString = 'IMG00005.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00005_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00005_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00005_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00005_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00005_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00005_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00006.JPG');
+App.progressCountCurrent = 6;
+App.batchStatusString = 'IMG00006.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00006_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00006_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00006_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00006_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00006_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00006_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00007.JPG');
+App.progressCountCurrent = 7;
+App.batchStatusString = 'IMG00007.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00007_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00007_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00007_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00007_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00007_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00007_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00008.JPG');
+App.progressCountCurrent = 8;
+App.batchStatusString = 'IMG00008.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00008_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00008_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00008_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00008_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00008_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00008_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00009.JPG');
+App.progressCountCurrent = 9;
+App.batchStatusString = 'IMG00009.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00009_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00009_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00009_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00009_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00009_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00009_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00010.JPG');
+App.progressCountCurrent = 10;
+App.batchStatusString = 'IMG00010.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00010_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00010_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00010_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00010_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00010_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00010_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00011.JPG');
+App.progressCountCurrent = 11;
+App.batchStatusString = 'IMG00011.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00011_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00011_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00011_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00011_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00011_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00011_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00012.JPG');
+App.progressCountCurrent = 12;
+App.batchStatusString = 'IMG00012.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00012_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00012_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00012_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00012_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00012_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00012_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00013.JPG');
+App.progressCountCurrent = 13;
+App.batchStatusString = 'IMG00013.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00013_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00013_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00013_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00013_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00013_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00013_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00014.JPG');
+App.progressCountCurrent = 14;
+App.batchStatusString = 'IMG00014.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00014_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00014_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00014_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00014_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00014_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00014_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00015.JPG');
+App.progressCountCurrent = 15;
+App.batchStatusString = 'IMG00015.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00015_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00015_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00015_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00015_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00015_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00015_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00016.JPG');
+App.progressCountCurrent = 16;
+App.batchStatusString = 'IMG00016.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00016_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00016_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00016_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00016_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00016_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00016_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00017.JPG');
+App.progressCountCurrent = 17;
+App.batchStatusString = 'IMG00017.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00017_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00017_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00017_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00017_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00017_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00017_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00018.JPG');
+App.progressCountCurrent = 18;
+App.batchStatusString = 'IMG00018.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00018_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00018_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00018_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00018_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00018_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00018_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00019.JPG');
+App.progressCountCurrent = 19;
+App.batchStatusString = 'IMG00019.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00019_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00019_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00019_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00019_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00019_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00019_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00020.JPG');
+App.progressCountCurrent = 20;
+App.batchStatusString = 'IMG00020.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00020_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00020_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00020_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00020_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00020_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00020_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00021.JPG');
+App.progressCountCurrent = 21;
+App.batchStatusString = 'IMG00021.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00021_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00021_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00021_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00021_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00021_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00021_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00022.JPG');
+App.progressCountCurrent = 22;
+App.batchStatusString = 'IMG00022.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00022_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00022_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00022_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00022_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00022_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00022_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00023.JPG');
+App.progressCountCurrent = 23;
+App.batchStatusString = 'IMG00023.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00023_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00023_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00023_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00023_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00023_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00023_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00024.JPG');
+App.progressCountCurrent = 24;
+App.batchStatusString = 'IMG00024.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00024_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00024_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00024_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00024_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00024_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00024_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00025.JPG');
+App.progressCountCurrent = 25;
+App.batchStatusString = 'IMG00025.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00025_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00025_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00025_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00025_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00025_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00025_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00026.JPG');
+App.progressCountCurrent = 26;
+App.batchStatusString = 'IMG00026.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00026_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00026_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00026_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00026_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00026_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00026_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00027.JPG');
+App.progressCountCurrent = 27;
+App.batchStatusString = 'IMG00027.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00027_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00027_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00027_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00027_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00027_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00027_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00028.JPG');
+App.progressCountCurrent = 28;
+App.batchStatusString = 'IMG00028.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00028_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00028_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00028_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00028_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00028_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00028_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00029.JPG');
+App.progressCountCurrent = 29;
+App.batchStatusString = 'IMG00029.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00029_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00029_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00029_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00029_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00029_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00029_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+doc = fw.openDocument('file:///C|/Documents and Settings/Administrator/Desktop/New Folder (3)/IMG00030.JPG');
+App.progressCountCurrent = 30;
+App.batchStatusString = 'IMG00030.JPG';
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00030_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00030_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/images/IMG00030_JPG.jpg',({applyScale:false, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:"100", useScale:true, xSize:0, ySize:0}));
+if (!Files.exists('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00030_JPG.jpg') || confirm('file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00030_JPG.jpg already exists. Click OK to replace the file.')) 
+fw.exportDocumentAs(doc, 'file:///C|/Documents and Settings/Administrator/Desktop/4th 05/thumbnails/IMG00030_JPG.jpg',({applyScale:true, colorMode:"24 bit", exportFormat:"JPEG", jpegQuality:80, jpegSmoothness:0, jpegSubsampling:0, name:"JPEG - Better Quality", numEntriesRequested:0, percentScale:100, useScale:false, xSize:-100, ySize:-100}));
+fw.closeDocument(doc);
+'done';
