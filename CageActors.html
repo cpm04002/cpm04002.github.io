@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8" />
+  <title>d3.js from Excel - ramblings.mcpher.com</title>
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+  Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+ <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+   google.load("jquery", "1");
+   google.setOnLoadCallback(function() {
+        initialize().then (
+            function (control) {
+                doTheTreeViz(control);
+            }
+        );
+   });
+  </script> <style>
+
+   body {
+    position: relative;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    margin: 1em auto 4em auto;
+    width: 960px;
+   }
+
+   h1 {
+    font-size: 64px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    margin: .3em 0 .1em 0;
+   }
+
+   h2 {
+    margin-top: 2em;
+   }
+
+   h1, h2 {
+    text-rendering: optimizeLegibility;
+   }
+
+   h2 a {
+    color: #ccc;
+    left: -20px;
+    position: absolute;
+    width: 740px;
+   }
+
+   footer {
+    font-size: small;
+    margin-top: 8em;
+   }
+
+   header aside {
+    margin-top: 20px;
+   }
+
+   header aside, footer aside {
+    color: #636363;
+    text-align: right;
+   }
+
+   aside {
+ float:right;
+ display:inline;
+ font-size: small;
+   }
+   .attribution {
+    font-size: small;
+    margin-bottom: 2em;
+   }
+
+   body > p, li > p {
+    line-height: 1.5em;
+   }
+
+   body > p {
+    width: 720px;
+   }
+
+   body > blockquote {
+    width: 640px;
+   }
+
+   li {
+    width: 680px;
+   }
+
+   pre, code, textarea {
+    font-family: "Menlo", monospace;
+   }
+
+   code {
+    line-height: 1em;
+   }
+
+   textarea {
+    font-size: 100%;
+   }
+
+   body > pre {
+    border-left: solid 2px #ccc;
+    padding-left: 18px;
+    margin: 2em 0 2em -20px;
+   }
+
+   .html .value, .javascript .string, .javascript .regexp {
+    color: #756bb1;
+   }
+
+   .html .tag, .css .tag, .javascript .keyword {
+    color: #3182bd;
+   }
+
+   .comment {
+    color: #636363;
+   }
+
+   .html .doctype, .javascript .number {
+    color: #31a354;
+   }
+
+   .html .attribute, .css .attribute, .javascript .class, .javascript .special {
+    color: #e6550d;
+   }
+
+   svg {
+    font: 10px sans-serif;
+   }
+
+   .axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+   }
+
+   sup, sub {
+    line-height: 0;
+   }
+
+   q:before, blockquote:before {
+    content: "?";
+   }
+
+   q:after, blockquote:after {
+    content: "?";
+   }
+
+   blockquote:before {
+    position: absolute;
+    left: 2em;
+   }
+
+   blockquote:after {
+    position: absolute;
+   }
+
+  </style>
+  <style>
+   #chart {
+    height: 600px;
+   }
+   .node rect {
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+   }
+   .node text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+   }
+   .link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+   }
+   .link:hover {
+    stroke-opacity: .5;
+   }
+
+   circle.node-dot {
+    fill: DarkSlateGray;
+    stroke: SlateGray;
+    stroke-width: 1px;
+   }
+
+
+   line.link {
+    fill: none;
+    stroke: SlateGray;
+    stroke-width: 1.5px;
+   }
+
+   marker#defaultMarker {
+    fill: SlateGray;
+   }
+
+   line.link.defaultMarker {
+    stroke: SlateGray;
+   }
+
+   circle {
+    fill: #ccc;
+    stroke: #333;
+    stroke-width: 1.5px;
+   }
+
+   text {
+    pointer-events: none;
+   }
+
+   text.shadow {
+    stroke: #fff;
+    stroke-width: 3px;
+    stroke-opacity: .8;
+   }
+
+  </style>  <script>
+  function doTheTreeViz(control) {
+
+    var svg = control.svg;
+
+    var force = control.force;
+    force.nodes(control.nodes)
+        .links(control.links)
+        .start();
+
+    // Update the links
+    var link = svg.selectAll("line.link")
+        .data(control.links, function(d) { return d.unique; } );
+ 
+   // Enter any new links
+    link.enter().insert("svg:line", ".node")
+        .attr("class", "link")
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; })
+      .append("svg:title")
+        .text(function(d) { return d.source[control.options.nodeLabel] + ":" + d.target[control.options.nodeLabel] ; });
+    
+    // Exit any old links.
+    link.exit().remove();
+
+
+  // Update the nodes
+    var node = svg.selectAll("g.node")
+        .data(control.nodes, function(d) { return d.unique; });
+
+    node.select("circle")
+        .style("fill", function(d) {
+            return getColor(d);
+        })
+        .attr("r", function(d) {
+            return getRadius(d);
+        })
+
+  // Enter any new nodes.
+    var nodeEnter = node.enter()
+      .append("svg:g")
+        .attr("class", "node")
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+        .on("dblclick", function(d){
+            control.nodeClickInProgress=false;
+            if (d.url)window.open(d.url);
+        })
+        .on("click", function(d){
+            // this is a hack so that click doesnt fire on the1st click of a dblclick
+            if (!control.nodeClickInProgress ) {
+                control.nodeClickInProgress = true;
+                setTimeout(function(){
+                    if (control.nodeClickInProgress) { 
+                        control.nodeClickInProgress = false;
+                        if (control.options.nodeFocus) {
+                            d.isCurrentlyFocused = !d.isCurrentlyFocused;
+                            doTheTreeViz(makeFilteredData(control));
+                        }
+                    }
+                },control.clickHack); 
+            }
+        })
+        .call(force.drag);
+
+    nodeEnter
+      .append("svg:circle")
+        .attr("r", function(d) {
+            return getRadius(d);
+        })
+        .style("fill", function(d) {
+            return getColor(d);
+        })
+      .append("svg:title")
+        .text(function(d) { return d[control.options.nodeLabel]; });
+
+   if (control.options.nodeLabel) {       
+       // text is done once for shadow as well as for text
+        nodeEnter.append("svg:text")
+            .attr("x", control.options.labelOffset)
+            .attr("dy", ".31em")
+            .attr("class", "shadow")
+            .style("font-size",control.options.labelFontSize + "px")
+            .text(function(d) {
+                return d.shortName ? d.shortName : d.name;
+            });
+        nodeEnter.append("svg:text")
+            .attr("x", control.options.labelOffset)
+            .attr("dy", ".35em")
+            .attr("class", "text")
+            .style("font-size",control.options.labelFontSize + "px")
+            .text(function(d) {
+                return d.shortName ? d.shortName : d.name;
+            });
+    }
+
+    // Exit any old nodes.
+    node.exit().remove();
+    control.link = svg.selectAll("line.link");
+    control.node = svg.selectAll("g.node");
+    force.on("tick", tick);
+
+
+
+    if (control.options.linkName) {
+        link.append("title")
+            .text(function(d) {
+                return d[control.options.linkName];
+        });
+    }
+
+
+    function tick() {
+        link.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+        node.attr("transform", function(d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+
+    }
+ 
+    function getRadius(d) {
+     var r = control.options.radius * (control.options.nodeResize ? Math.sqrt(d[control.options.nodeResize]) / Math.PI : 1);
+     return control.options.nodeFocus && d.isCurrentlyFocused ? control.options.nodeFocusRadius  : r;
+    }
+    function getColor(d) {
+        return control.options.nodeFocus && d.isCurrentlyFocused ? control.options.nodeFocusColor  : control.color(d.group) ;
+    }
+
+   }
+
+function makeFilteredData(control,selectedNode){
+    // we'll keep only the data where filterned nodes are the source or target
+    var newNodes = [];
+    var newLinks = [];
+
+    for (var i = 0; i < control.data.links.length ; i++) {
+        var link = control.data.links[i];
+        if (link.target.isCurrentlyFocused || link.source.isCurrentlyFocused) {
+            newLinks.push(link);
+            addNodeIfNotThere(link.source,newNodes);
+            addNodeIfNotThere(link.target,newNodes);
+        }
+    }
+    // if none are selected reinstate the whole dataset
+    if (newNodes.length > 0) {
+        control.links = newLinks;
+        control.nodes = newNodes;
+    }
+    else {
+        control.nodes = control.data.nodes;
+        control.links = control.data.links;
+    }
+    return control;
+    
+    function addNodeIfNotThere( node, nodes) {
+        for ( var i=0; i < nodes.length; i++) {
+            if (nodes[i].unique == node.unique) return i;
+        }
+        return nodes.push(node) -1;
+    }
+}
+function organizeData(control) {
+
+    for (var i=0; i < control.nodes.length; i ++ ) {
+        var node = control.nodes[i]; 
+        node.unique = i;
+        node.isCurrentlyFocused = false;
+    }
+    
+    for (var i=0; i < control.links.length; i ++ ) {
+        var link = control.links[i];
+        link.unique = i;
+        link.source = control.nodes[link.source];
+        link.target = control.nodes[link.target];
+    }
+    return control;
+}
+
+
+function initialize () {
+   
+    var initPromise = $.Deferred();
+
+    getTheData().then( function (data) {  
+        var control = {};
+        control.data = data;
+        control.divName = "#chart";
+
+        control.options = $.extend({
+            stackHeight : 12,
+            radius : 5,
+            fontSize : 14,
+            labelFontSize : 8,
+            nodeLabel : null,
+            markerWidth : 0,
+            markerHeight : 0,
+            width : $(control.divName).outerWidth(),
+            gap : 1.5,
+            nodeResize : "",
+            linkDistance : 80,
+            charge : -120,
+            styleColumn : null,
+            styles : null,
+            linkName : null,
+            nodeFocus: true,
+            nodeFocusRadius: 25,
+            nodeFocusColor: "black",
+            labelOffset: "5",
+            gravity: .05,
+            height : $(control.divName).outerHeight()
+        }, control.data.d3.options);
+    
+        
+        var options = control.options;
+        options.gap = options.gap * options.radius;
+        control.width = options.width;
+        control.height = options.height;
+        control.data = control.data.d3.data;
+        control.nodes = control.data.nodes;
+        control.links = control.data.links;
+        control.color = d3.scale.category20();
+        control.clickHack = 200;
+        organizeData(control);
+    
+        control.svg = d3.select(control.divName)
+            .append("svg:svg")
+            .attr("width", control.width)
+            .attr("height", control.height);
+        
+    
+        // get list of unique values in stylecolumn
+        control.linkStyles = [];
+        if (control.options.styleColumn) {
+         var x;
+         for (var i = 0; i < control.links.length; i++) {
+          if (control.linkStyles.indexOf( x = control.links[i][control.options.styleColumn].toLowerCase()) == -1)
+           control.linkStyles.push(x);
+         }
+        } 
+        else
+         control.linkStyles[0] = "defaultMarker";
+        
+        control.force = d3.layout.force().
+            size([control.width, control.height])
+            .linkDistance(control.options.linkDistance)
+            .charge(control.options.charge)
+            .gravity(control.options.gravity);
+    
+    
+       initPromise.resolve(control);
+    });
+    return initPromise.promise();
+}
+
+            
+function getTheData() {
+    var dataPromise = $.Deferred();
+    // return a promise if data is being received asynch and resolve it when done.
+    dataPromise.resolve (mcpherTreeData);
+    return dataPromise.promise();
+}
+</script><script> window['mcpherTreeData'] = {"d3":{"options":{"radius":10,"fontSize":9,"labelFontSize":9,"width":1200,"gravity":0.1,"height":1200,"nodeFocusColor":"black","nodeFocusRadius":15,"nodeFocus":true,"linkDistance":100,"charge":-75,"nodeResize":"count","nodeLabel":"label","outerRadius":10,"linkName":"tag"},"data":{"nodes":[{"name":"The Best of Times","count":4,"group":"Crispin Glover","linkCount":4,"label":"The Best of Times","shortName":"The Best of Times"},{"name":"Crispin Glover","count":1,"group":"Crispin Glover","linkCount":1,"label":"Crispin Glover","shortName":"Crispin Glover"},{"name":"Jill Schoelen","count":1,"group":"Jill Schoelen","linkCount":1,"label":"Jill Schoelen","shortName":"Jill Schoelen"},{"name":"Nicolas Cage","count":90,"group":"Nicolas Cage","linkCount":90,"label":"Nicolas Cage","shortName":"Nicolas Cage"},{"name":"Julie Piekarski","count":1,"group":"Julie Piekarski","linkCount":1,"label":"Julie Piekarski","shortName":"Julie Piekarski"},{"name":"Valley Girl","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Valley Girl","shortName":"Valley Girl"},{"name":"Deborah Foreman","count":1,"group":"Deborah Foreman","linkCount":1,"label":"Deborah Foreman","shortName":"Deborah Foreman"},{"name":"Elizabeth Daily","count":1,"group":"Elizabeth Daily","linkCount":1,"label":"Elizabeth Daily","shortName":"Elizabeth Daily"},{"name":"Michael Bowen","count":1,"group":"Michael Bowen","linkCount":1,"label":"Michael Bowen","shortName":"Michael Bowen"},{"name":"Birdy","count":4,"group":"Matthew Modine","linkCount":4,"label":"Birdy","shortName":"Birdy"},{"name":"Matthew Modine","count":1,"group":"Matthew Modine","linkCount":1,"label":"Matthew Modine","shortName":"Matthew Modine"},{"name":"John Harkins","count":1,"group":"John Harkins","linkCount":1,"label":"John Harkins","shortName":"John Harkins"},{"name":"Sandy Baron","count":1,"group":"Sandy Baron","linkCount":1,"label":"Sandy Baron","shortName":"Sandy Baron"},{"name":"Racing with the Moon","count":4,"group":"Sean Penn","linkCount":4,"label":"Racing with the Moon","shortName":"Racing with the Moon"},{"name":"Sean Penn","count":1,"group":"Sean Penn","linkCount":1,"label":"Sean Penn","shortName":"Sean Penn"},{"name":"Elizabeth McGovern","count":1,"group":"Elizabeth McGovern","linkCount":1,"label":"Elizabeth McGovern","shortName":"Elizabeth McGovern"},{"name":"John Karlen","count":1,"group":"John Karlen","linkCount":1,"label":"John Karlen","shortName":"John Karlen"},{"name":"The Boy in Blue","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Boy in Blue","shortName":"The Boy in Blue"},{"name":"Cynthia Dale","count":1,"group":"Cynthia Dale","linkCount":1,"label":"Cynthia Dale","shortName":"Cynthia Dale"},{"name":"Christopher Plummer","count":1,"group":"Christopher Plummer","linkCount":1,"label":"Christopher Plummer","shortName":"Christopher Plummer"},{"name":"David Naughton","count":1,"group":"David Naughton","linkCount":1,"label":"David Naughton","shortName":"David Naughton"},{"name":"Peggy Sue Got Married","count":4,"group":"Kathleen Turner","linkCount":4,"label":"Peggy Sue Got Married","shortName":"Peggy Sue Got Married"},{"name":"Kathleen Turner","count":1,"group":"Kathleen Turner","linkCount":1,"label":"Kathleen Turner","shortName":"Kathleen Turner"},{"name":"Barry Miller","count":1,"group":"Barry Miller","linkCount":1,"label":"Barry Miller","shortName":"Barry Miller"},{"name":"Catherine Hicks","count":1,"group":"Catherine Hicks","linkCount":1,"label":"Catherine Hicks","shortName":"Catherine Hicks"},{"name":"Moonstruck","count":4,"group":"Cher","linkCount":4,"label":"Moonstruck","shortName":"Moonstruck"},{"name":"Cher","count":1,"group":"Cher","linkCount":1,"label":"Cher","shortName":"Cher"},{"name":"Olympia Dukakis","count":1,"group":"Olympia Dukakis","linkCount":1,"label":"Olympia Dukakis","shortName":"Olympia Dukakis"},{"name":"Danny Aiello","count":1,"group":"Danny Aiello","linkCount":1,"label":"Danny Aiello","shortName":"Danny Aiello"},{"name":"Raising Arizona","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Raising Arizona","shortName":"Raising Arizona"},{"name":"Holly Hunter","count":1,"group":"Holly Hunter","linkCount":1,"label":"Holly Hunter","shortName":"Holly Hunter"},{"name":"Trey Wilson","count":1,"group":"Trey Wilson","linkCount":1,"label":"Trey Wilson","shortName":"Trey Wilson"},{"name":"John Goodman","count":2,"group":"John Goodman","linkCount":2,"label":"John Goodman","shortName":"John Goodman"},{"name":"Vampire's Kiss","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Vampire's Kiss","shortName":"Vampire's Kiss"},{"name":"Maria Conchita Alonso","count":1,"group":"Maria Conchita Alonso","linkCount":1,"label":"Maria Conchita Alonso","shortName":"Maria Conchita Alonso"},{"name":"Jennifer Beals","count":1,"group":"Jennifer Beals","linkCount":1,"label":"Jennifer Beals","shortName":"Jennifer Beals"},{"name":"Elizabeth Ashley","count":1,"group":"Elizabeth Ashley","linkCount":1,"label":"Elizabeth Ashley","shortName":"Elizabeth Ashley"},{"name":"Fire Birds","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Fire Birds","shortName":"Fire Birds"},{"name":"Tommy Lee Jones","count":1,"group":"Tommy Lee Jones","linkCount":1,"label":"Tommy Lee Jones","shortName":"Tommy Lee Jones"},{"name":"Sean Young","count":1,"group":"Sean Young","linkCount":1,"label":"Sean Young","shortName":"Sean Young"},{"name":"Bryan Kestner","count":1,"group":"Bryan Kestner","linkCount":1,"label":"Bryan Kestner","shortName":"Bryan Kestner"},{"name":"Industrial Symphony No. 1: The Dream of the Brokenhearted","count":4,"group":"Laura Dern","linkCount":4,"label":"Industrial Symphony No. 1: The Dream of the Brokenhearted","shortName":"Industrial Symphony No. 1: The Dream of the Brokenhearted"},{"name":"Laura Dern","count":2,"group":"Laura Dern","linkCount":2,"label":"Laura Dern","shortName":"Laura Dern"},{"name":"Julee Cruise","count":1,"group":"Julee Cruise","linkCount":1,"label":"Julee Cruise","shortName":"Julee Cruise"},{"name":"Lisa Giobbi","count":1,"group":"Lisa Giobbi","linkCount":1,"label":"Lisa Giobbi","shortName":"Lisa Giobbi"},{"name":"Time to Kill","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Time to Kill","shortName":"Time to Kill"},{"name":"Ricky Tognazzi","count":1,"group":"Ricky Tognazzi","linkCount":1,"label":"Ricky Tognazzi","shortName":"Ricky Tognazzi"},{"name":"Patrice-Flora Praxo","count":1,"group":"Patrice-Flora Praxo","linkCount":1,"label":"Patrice-Flora Praxo","shortName":"Patrice-Flora Praxo"},{"name":"Gianluca Favilla","count":1,"group":"Gianluca Favilla","linkCount":1,"label":"Gianluca Favilla","shortName":"Gianluca Favilla"},{"name":"Wild at Heart","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Wild at Heart","shortName":"Wild at Heart"},{"name":"Willem Dafoe","count":3,"group":"Willem Dafoe","linkCount":3,"label":"Willem Dafoe","shortName":"Willem Dafoe"},{"name":"J.E. Freeman","count":1,"group":"J.E. Freeman","linkCount":1,"label":"J.E. Freeman","shortName":"J.E. Freeman"},{"name":"Zandalee","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Zandalee","shortName":"Zandalee"},{"name":"Erika Anderson","count":1,"group":"Erika Anderson","linkCount":1,"label":"Erika Anderson","shortName":"Erika Anderson"},{"name":"Judge Reinhold","count":1,"group":"Judge Reinhold","linkCount":1,"label":"Judge Reinhold","shortName":"Judge Reinhold"},{"name":"Joe Pantoliano","count":1,"group":"Joe Pantoliano","linkCount":1,"label":"Joe Pantoliano","shortName":"Joe Pantoliano"},{"name":"Honeymoon in Vegas","count":4,"group":"James Caan","linkCount":4,"label":"Honeymoon in Vegas","shortName":"Honeymoon in Vegas"},{"name":"James Caan","count":1,"group":"James Caan","linkCount":1,"label":"James Caan","shortName":"James Caan"},{"name":"Sarah Jessica Parker","count":1,"group":"Sarah Jessica Parker","linkCount":1,"label":"Sarah Jessica Parker","shortName":"Sarah Jessica Parker"},{"name":"Pat Morita","count":1,"group":"Pat Morita","linkCount":1,"label":"Pat Morita","shortName":"Pat Morita"},{"name":"Red Rock West","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Red Rock West","shortName":"Red Rock West"},{"name":"Dennis Hopper","count":1,"group":"Dennis Hopper","linkCount":1,"label":"Dennis Hopper","shortName":"Dennis Hopper"},{"name":"Lara Flynn Boyle","count":1,"group":"Lara Flynn Boyle","linkCount":1,"label":"Lara Flynn Boyle","shortName":"Lara Flynn Boyle"},{"name":"Craig Reay","count":1,"group":"Craig Reay","linkCount":1,"label":"Craig Reay","shortName":"Craig Reay"},{"name":"Amos & Andrew","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Amos & Andrew","shortName":"Amos & Andrew"},{"name":"Samuel L. Jackson","count":2,"group":"Samuel L. Jackson","linkCount":2,"label":"Samuel L. Jackson","shortName":"Samuel L. Jackson"},{"name":"Michael Lerner","count":1,"group":"Michael Lerner","linkCount":1,"label":"Michael Lerner","shortName":"Michael Lerner"},{"name":"Margaret Colin","count":1,"group":"Margaret Colin","linkCount":1,"label":"Margaret Colin","shortName":"Margaret Colin"},{"name":"Deadfall","count":4,"group":"Michael Biehn","linkCount":4,"label":"Deadfall","shortName":"Deadfall"},{"name":"Michael Biehn","count":1,"group":"Michael Biehn","linkCount":1,"label":"Michael Biehn","shortName":"Michael Biehn"},{"name":"Sarah Trigger","count":1,"group":"Sarah Trigger","linkCount":1,"label":"Sarah Trigger","shortName":"Sarah Trigger"},{"name":"James Coburn","count":1,"group":"James Coburn","linkCount":1,"label":"James Coburn","shortName":"James Coburn"},{"name":"Guarding Tess","count":4,"group":"Shirley MacLaine","linkCount":4,"label":"Guarding Tess","shortName":"Guarding Tess"},{"name":"Shirley MacLaine","count":1,"group":"Shirley MacLaine","linkCount":1,"label":"Shirley MacLaine","shortName":"Shirley MacLaine"},{"name":"Austin Pendleton","count":1,"group":"Austin Pendleton","linkCount":1,"label":"Austin Pendleton","shortName":"Austin Pendleton"},{"name":"Edward Albert","count":1,"group":"Edward Albert","linkCount":1,"label":"Edward Albert","shortName":"Edward Albert"},{"name":"It Could Happen to You","count":4,"group":"Nicolas Cage","linkCount":4,"label":"It Could Happen to You","shortName":"It Could Happen to You"},{"name":"Bridget Fonda","count":1,"group":"Bridget Fonda","linkCount":1,"label":"Bridget Fonda","shortName":"Bridget Fonda"},{"name":"Rosie Perez","count":1,"group":"Rosie Perez","linkCount":1,"label":"Rosie Perez","shortName":"Rosie Perez"},{"name":"Wendell Pierce","count":1,"group":"Wendell Pierce","linkCount":1,"label":"Wendell Pierce","shortName":"Wendell Pierce"},{"name":"Trapped in Paradise","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Trapped in Paradise","shortName":"Trapped in Paradise"},{"name":"Jon Lovitz","count":1,"group":"Jon Lovitz","linkCount":1,"label":"Jon Lovitz","shortName":"Jon Lovitz"},{"name":"Dana Carvey","count":1,"group":"Dana Carvey","linkCount":1,"label":"Dana Carvey","shortName":"Dana Carvey"},{"name":"Richard B. Shull","count":1,"group":"Richard B. Shull","linkCount":1,"label":"Richard B. Shull","shortName":"Richard B. Shull"},{"name":"Kiss of Death","count":4,"group":"David Caruso","linkCount":4,"label":"Kiss of Death","shortName":"Kiss of Death"},{"name":"David Caruso","count":1,"group":"David Caruso","linkCount":1,"label":"David Caruso","shortName":"David Caruso"},{"name":"Helen Hunt","count":1,"group":"Helen Hunt","linkCount":1,"label":"Helen Hunt","shortName":"Helen Hunt"},{"name":"Leaving Las Vegas","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Leaving Las Vegas","shortName":"Leaving Las Vegas"},{"name":"Elisabeth Shue","count":1,"group":"Elisabeth Shue","linkCount":1,"label":"Elisabeth Shue","shortName":"Elisabeth Shue"},{"name":"Julian Sands","count":1,"group":"Julian Sands","linkCount":1,"label":"Julian Sands","shortName":"Julian Sands"},{"name":"Richard Lewis","count":1,"group":"Richard Lewis","linkCount":1,"label":"Richard Lewis","shortName":"Richard Lewis"},{"name":"The Rock","count":4,"group":"Sean Connery","linkCount":4,"label":"The Rock","shortName":"The Rock"},{"name":"Sean Connery","count":1,"group":"Sean Connery","linkCount":1,"label":"Sean Connery","shortName":"Sean Connery"},{"name":"Ed Harris","count":1,"group":"Ed Harris","linkCount":1,"label":"Ed Harris","shortName":"Ed Harris"},{"name":"John Spencer","count":1,"group":"John Spencer","linkCount":1,"label":"John Spencer","shortName":"John Spencer"},{"name":"Con Air","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Con Air","shortName":"Con Air"},{"name":"John Cusack","count":3,"group":"John Cusack","linkCount":3,"label":"John Cusack","shortName":"John Cusack"},{"name":"John Malkovich","count":2,"group":"John Malkovich","linkCount":2,"label":"John Malkovich","shortName":"John Malkovich"},{"name":"Colm Meaney","count":1,"group":"Colm Meaney","linkCount":1,"label":"Colm Meaney","shortName":"Colm Meaney"},{"name":"Face/Off","count":4,"group":"John Travolta","linkCount":4,"label":"Face/Off","shortName":"Face/Off"},{"name":"John Travolta","count":1,"group":"John Travolta","linkCount":1,"label":"John Travolta","shortName":"John Travolta"},{"name":"Joan Allen","count":1,"group":"Joan Allen","linkCount":1,"label":"Joan Allen","shortName":"Joan Allen"},{"name":"Alessandro Nivola","count":1,"group":"Alessandro Nivola","linkCount":1,"label":"Alessandro Nivola","shortName":"Alessandro Nivola"},{"name":"City of Angels","count":4,"group":"Nicolas Cage","linkCount":4,"label":"City of Angels","shortName":"City of Angels"},{"name":"Meg Ryan","count":1,"group":"Meg Ryan","linkCount":1,"label":"Meg Ryan","shortName":"Meg Ryan"},{"name":"Andre Braugher","count":1,"group":"Andre Braugher","linkCount":1,"label":"Andre Braugher","shortName":"Andre Braugher"},{"name":"Dennis Franz","count":1,"group":"Dennis Franz","linkCount":1,"label":"Dennis Franz","shortName":"Dennis Franz"},{"name":"Snake Eyes","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Snake Eyes","shortName":"Snake Eyes"},{"name":"Gary Sinise","count":1,"group":"Gary Sinise","linkCount":1,"label":"Gary Sinise","shortName":"Gary Sinise"},{"name":"John Heard","count":1,"group":"John Heard","linkCount":1,"label":"John Heard","shortName":"John Heard"},{"name":"Carla Gugino","count":1,"group":"Carla Gugino","linkCount":1,"label":"Carla Gugino","shortName":"Carla Gugino"},{"name":"8MM","count":4,"group":"Nicolas Cage","linkCount":4,"label":"8MM","shortName":"8MM"},{"name":"Joaquin Phoenix","count":1,"group":"Joaquin Phoenix","linkCount":1,"label":"Joaquin Phoenix","shortName":"Joaquin Phoenix"},{"name":"James Gandolfini","count":1,"group":"James Gandolfini","linkCount":1,"label":"James Gandolfini","shortName":"James Gandolfini"},{"name":"Peter Stormare","count":1,"group":"Peter Stormare","linkCount":1,"label":"Peter Stormare","shortName":"Peter Stormare"},{"name":"Bringing Out the Dead","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Bringing Out the Dead","shortName":"Bringing Out the Dead"},{"name":"Patricia Arquette","count":1,"group":"Patricia Arquette","linkCount":1,"label":"Patricia Arquette","shortName":"Patricia Arquette"},{"name":"Ving Rhames","count":1,"group":"Ving Rhames","linkCount":1,"label":"Ving Rhames","shortName":"Ving Rhames"},{"name":"Gone in 60 Seconds","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Gone in 60 Seconds","shortName":"Gone in 60 Seconds"},{"name":"Angelina Jolie","count":1,"group":"Angelina Jolie","linkCount":1,"label":"Angelina Jolie","shortName":"Angelina Jolie"},{"name":"Giovanni Ribisi","count":1,"group":"Giovanni Ribisi","linkCount":1,"label":"Giovanni Ribisi","shortName":"Giovanni Ribisi"},{"name":"T.J. Cross","count":1,"group":"T.J. Cross","linkCount":1,"label":"T.J. Cross","shortName":"T.J. Cross"},{"name":"Shadow of the Vampire","count":4,"group":"John Malkovich","linkCount":4,"label":"Shadow of the Vampire","shortName":"Shadow of the Vampire"},{"name":"Udo Kier","count":1,"group":"Udo Kier","linkCount":1,"label":"Udo Kier","shortName":"Udo Kier"},{"name":"Cary Elwes","count":1,"group":"Cary Elwes","linkCount":1,"label":"Cary Elwes","shortName":"Cary Elwes"},{"name":"The Family Man","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Family Man","shortName":"The Family Man"},{"name":"Téa Leoni","count":1,"group":"Téa Leoni","linkCount":1,"label":"Téa Leoni","shortName":"Téa Leoni"},{"name":"Don Cheadle","count":1,"group":"Don Cheadle","linkCount":1,"label":"Don Cheadle","shortName":"Don Cheadle"},{"name":"Jeremy Piven","count":1,"group":"Jeremy Piven","linkCount":1,"label":"Jeremy Piven","shortName":"Jeremy Piven"},{"name":"Bel Air","count":4,"group":"Barbara Bain","linkCount":4,"label":"Bel Air","shortName":"Bel Air"},{"name":"Barbara Bain","count":1,"group":"Barbara Bain","linkCount":1,"label":"Barbara Bain","shortName":"Barbara Bain"},{"name":"Marc Coppola","count":1,"group":"Marc Coppola","linkCount":1,"label":"Marc Coppola","shortName":"Marc Coppola"},{"name":"Esteban Powell","count":1,"group":"Esteban Powell","linkCount":1,"label":"Esteban Powell","shortName":"Esteban Powell"},{"name":"Jennifer Rubin","count":1,"group":"Jennifer Rubin","linkCount":1,"label":"Jennifer Rubin","shortName":"Jennifer Rubin"},{"name":"Captain Corelli's Mandolin","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Captain Corelli's Mandolin","shortName":"Captain Corelli's Mandolin"},{"name":"Penélope Cruz","count":1,"group":"Penélope Cruz","linkCount":1,"label":"Penélope Cruz","shortName":"Penélope Cruz"},{"name":"John Hurt","count":1,"group":"John Hurt","linkCount":1,"label":"John Hurt","shortName":"John Hurt"},{"name":"Christian Bale","count":1,"group":"Christian Bale","linkCount":1,"label":"Christian Bale","shortName":"Christian Bale"},{"name":"Ghost Rider","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Ghost Rider","shortName":"Ghost Rider"},{"name":"Eva Mendes","count":2,"group":"Eva Mendes","linkCount":2,"label":"Eva Mendes","shortName":"Eva Mendes"},{"name":"Sam Elliott","count":1,"group":"Sam Elliott","linkCount":1,"label":"Sam Elliott","shortName":"Sam Elliott"},{"name":"Matt Long","count":1,"group":"Matt Long","linkCount":1,"label":"Matt Long","shortName":"Matt Long"},{"name":"A Christmas Carol","count":4,"group":"Simon Callow","linkCount":4,"label":"A Christmas Carol","shortName":"A Christmas Carol"},{"name":"Simon Callow","count":1,"group":"Simon Callow","linkCount":1,"label":"Simon Callow","shortName":"Simon Callow"},{"name":"Kate Winslet","count":2,"group":"Kate Winslet","linkCount":2,"label":"Kate Winslet","shortName":"Kate Winslet"},{"name":"Jane Horrocks","count":1,"group":"Jane Horrocks","linkCount":1,"label":"Jane Horrocks","shortName":"Jane Horrocks"},{"name":"Adaptation.","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Adaptation.","shortName":"Adaptation."},{"name":"Meryl Streep","count":2,"group":"Meryl Streep","linkCount":2,"label":"Meryl Streep","shortName":"Meryl Streep"},{"name":"Chris Cooper","count":1,"group":"Chris Cooper","linkCount":1,"label":"Chris Cooper","shortName":"Chris Cooper"},{"name":"Tilda Swinton","count":1,"group":"Tilda Swinton","linkCount":1,"label":"Tilda Swinton","shortName":"Tilda Swinton"},{"name":"The Life of David Gale","count":4,"group":"Kevin Spacey","linkCount":4,"label":"The Life of David Gale","shortName":"The Life of David Gale"},{"name":"Kevin Spacey","count":1,"group":"Kevin Spacey","linkCount":1,"label":"Kevin Spacey","shortName":"Kevin Spacey"},{"name":"Laura Linney","count":1,"group":"Laura Linney","linkCount":1,"label":"Laura Linney","shortName":"Laura Linney"},{"name":"Cleo King","count":1,"group":"Cleo King","linkCount":1,"label":"Cleo King","shortName":"Cleo King"},{"name":"Sonny","count":4,"group":"James Franco","linkCount":4,"label":"Sonny","shortName":"Sonny"},{"name":"James Franco","count":1,"group":"James Franco","linkCount":1,"label":"James Franco","shortName":"James Franco"},{"name":"Brenda Blethyn","count":1,"group":"Brenda Blethyn","linkCount":1,"label":"Brenda Blethyn","shortName":"Brenda Blethyn"},{"name":"Mena Suvari","count":1,"group":"Mena Suvari","linkCount":1,"label":"Mena Suvari","shortName":"Mena Suvari"},{"name":"Harry Dean Stanton","count":1,"group":"Harry Dean Stanton","linkCount":1,"label":"Harry Dean Stanton","shortName":"Harry Dean Stanton"},{"name":"Matchstick Men","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Matchstick Men","shortName":"Matchstick Men"},{"name":"Alison Lohman","count":1,"group":"Alison Lohman","linkCount":1,"label":"Alison Lohman","shortName":"Alison Lohman"},{"name":"Sam Rockwell","count":1,"group":"Sam Rockwell","linkCount":1,"label":"Sam Rockwell","shortName":"Sam Rockwell"},{"name":"Bruce Altman","count":1,"group":"Bruce Altman","linkCount":1,"label":"Bruce Altman","shortName":"Bruce Altman"},{"name":"National Treasure","count":4,"group":"Nicolas Cage","linkCount":4,"label":"National Treasure","shortName":"National Treasure"},{"name":"Diane Kruger","count":2,"group":"Diane Kruger","linkCount":2,"label":"Diane Kruger","shortName":"Diane Kruger"},{"name":"Justin Bartha","count":2,"group":"Justin Bartha","linkCount":2,"label":"Justin Bartha","shortName":"Justin Bartha"},{"name":"Sean Bean","count":1,"group":"Sean Bean","linkCount":1,"label":"Sean Bean","shortName":"Sean Bean"},{"name":"Astro Boy","count":4,"group":"Freddie Highmore","linkCount":4,"label":"Astro Boy","shortName":"Astro Boy"},{"name":"Freddie Highmore","count":1,"group":"Freddie Highmore","linkCount":1,"label":"Freddie Highmore","shortName":"Freddie Highmore"},{"name":"Kristen Bell","count":1,"group":"Kristen Bell","linkCount":1,"label":"Kristen Bell","shortName":"Kristen Bell"},{"name":"Charlize Theron","count":1,"group":"Charlize Theron","linkCount":1,"label":"Charlize Theron","shortName":"Charlize Theron"},{"name":"The Weather Man","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Weather Man","shortName":"The Weather Man"},{"name":"Hope Davis","count":1,"group":"Hope Davis","linkCount":1,"label":"Hope Davis","shortName":"Hope Davis"},{"name":"Nicholas Hoult","count":1,"group":"Nicholas Hoult","linkCount":1,"label":"Nicholas Hoult","shortName":"Nicholas Hoult"},{"name":"Michael Caine","count":1,"group":"Michael Caine","linkCount":1,"label":"Michael Caine","shortName":"Michael Caine"},{"name":"Lord of War","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Lord of War","shortName":"Lord of War"},{"name":"Ethan Hawke","count":1,"group":"Ethan Hawke","linkCount":1,"label":"Ethan Hawke","shortName":"Ethan Hawke"},{"name":"Jared Leto","count":1,"group":"Jared Leto","linkCount":1,"label":"Jared Leto","shortName":"Jared Leto"},{"name":"Bridget Moynahan","count":1,"group":"Bridget Moynahan","linkCount":1,"label":"Bridget Moynahan","shortName":"Bridget Moynahan"},{"name":"The Ant Bully","count":4,"group":"Paul Giamatti","linkCount":4,"label":"The Ant Bully","shortName":"The Ant Bully"},{"name":"Paul Giamatti","count":1,"group":"Paul Giamatti","linkCount":1,"label":"Paul Giamatti","shortName":"Paul Giamatti"},{"name":"Julia Roberts","count":1,"group":"Julia Roberts","linkCount":1,"label":"Julia Roberts","shortName":"Julia Roberts"},{"name":"Next","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Next","shortName":"Next"},{"name":"Julianne Moore","count":1,"group":"Julianne Moore","linkCount":1,"label":"Julianne Moore","shortName":"Julianne Moore"},{"name":"Jessica Biel","count":1,"group":"Jessica Biel","linkCount":1,"label":"Jessica Biel","shortName":"Jessica Biel"},{"name":"Thomas Kretschmann","count":1,"group":"Thomas Kretschmann","linkCount":1,"label":"Thomas Kretschmann","shortName":"Thomas Kretschmann"},{"name":"Knowing","count":5,"group":"Nicolas Cage","linkCount":5,"label":"Knowing","shortName":"Knowing"},{"name":"Chandler Canterbury","count":1,"group":"Chandler Canterbury","linkCount":1,"label":"Chandler Canterbury","shortName":"Chandler Canterbury"},{"name":"Rose Byrne","count":1,"group":"Rose Byrne","linkCount":1,"label":"Rose Byrne","shortName":"Rose Byrne"},{"name":"Lara Robinson","count":1,"group":"Lara Robinson","linkCount":1,"label":"Lara Robinson","shortName":"Lara Robinson"},{"name":"The Wicker Man","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Wicker Man","shortName":"The Wicker Man"},{"name":"Ellen Burstyn","count":1,"group":"Ellen Burstyn","linkCount":1,"label":"Ellen Burstyn","shortName":"Ellen Burstyn"},{"name":"Leelee Sobieski","count":1,"group":"Leelee Sobieski","linkCount":1,"label":"Leelee Sobieski","shortName":"Leelee Sobieski"},{"name":"Kate Beahan","count":1,"group":"Kate Beahan","linkCount":1,"label":"Kate Beahan","shortName":"Kate Beahan"},{"name":"National Treasure: Book of Secrets","count":4,"group":"Nicolas Cage","linkCount":4,"label":"National Treasure: Book of Secrets","shortName":"National Treasure: Book of Secrets"},{"name":"Jon Voight","count":1,"group":"Jon Voight","linkCount":1,"label":"Jon Voight","shortName":"Jon Voight"},{"name":"World Trade Center","count":4,"group":"Nicolas Cage","linkCount":4,"label":"World Trade Center","shortName":"World Trade Center"},{"name":"Michael Peña","count":1,"group":"Michael Peña","linkCount":1,"label":"Michael Peña","shortName":"Michael Peña"},{"name":"Maria Bello","count":1,"group":"Maria Bello","linkCount":1,"label":"Maria Bello","shortName":"Maria Bello"},{"name":"Maggie Gyllenhaal","count":1,"group":"Maggie Gyllenhaal","linkCount":1,"label":"Maggie Gyllenhaal","shortName":"Maggie Gyllenhaal"},{"name":"Season of the Witch","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Season of the Witch","shortName":"Season of the Witch"},{"name":"Ron Perlman","count":1,"group":"Ron Perlman","linkCount":1,"label":"Ron Perlman","shortName":"Ron Perlman"},{"name":"Claire Foy","count":1,"group":"Claire Foy","linkCount":1,"label":"Claire Foy","shortName":"Claire Foy"},{"name":"Stephen Campbell Moore","count":1,"group":"Stephen Campbell Moore","linkCount":1,"label":"Stephen Campbell Moore","shortName":"Stephen Campbell Moore"},{"name":"The Croods","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Croods","shortName":"The Croods"},{"name":"Ryan Reynolds","count":2,"group":"Ryan Reynolds","linkCount":2,"label":"Ryan Reynolds","shortName":"Ryan Reynolds"},{"name":"Emma Stone","count":2,"group":"Emma Stone","linkCount":2,"label":"Emma Stone","shortName":"Emma Stone"},{"name":"Catherine Keener","count":1,"group":"Catherine Keener","linkCount":1,"label":"Catherine Keener","shortName":"Catherine Keener"},{"name":"A Thousand Words","count":4,"group":"Eddie Murphy","linkCount":4,"label":"A Thousand Words","shortName":"A Thousand Words"},{"name":"Eddie Murphy","count":1,"group":"Eddie Murphy","linkCount":1,"label":"Eddie Murphy","shortName":"Eddie Murphy"},{"name":"Cliff Curtis","count":1,"group":"Cliff Curtis","linkCount":1,"label":"Cliff Curtis","shortName":"Cliff Curtis"},{"name":"Kerry Washington","count":1,"group":"Kerry Washington","linkCount":1,"label":"Kerry Washington","shortName":"Kerry Washington"},{"name":"Clark Duke","count":1,"group":"Clark Duke","linkCount":1,"label":"Clark Duke","shortName":"Clark Duke"},{"name":"Too Tough to Die: A Tribute to Johnny Ramone","count":1,"group":"Dicky Barrett","linkCount":1,"label":"Too Tough to Die: A Tribute to Johnny Ramone","shortName":"Too Tough to Die: A Tribute to Johnny Ramone"},{"name":"Dicky Barrett","count":1,"group":"Dicky Barrett","linkCount":1,"label":"Dicky Barrett","shortName":"Dicky Barrett"},{"name":"Bangkok Dangerous","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Bangkok Dangerous","shortName":"Bangkok Dangerous"},{"name":"Charlie Yeung","count":1,"group":"Charlie Yeung","linkCount":1,"label":"Charlie Yeung","shortName":"Charlie Yeung"},{"name":"Shahkrit Yamnarm","count":1,"group":"Shahkrit Yamnarm","linkCount":1,"label":"Shahkrit Yamnarm","shortName":"Shahkrit Yamnarm"},{"name":"Panward Hemmanee","count":1,"group":"Panward Hemmanee","linkCount":1,"label":"Panward Hemmanee","shortName":"Panward Hemmanee"},{"name":"The Sorcerer's Apprentice","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Sorcerer's Apprentice","shortName":"The Sorcerer's Apprentice"},{"name":"Jay Baruchel","count":1,"group":"Jay Baruchel","linkCount":1,"label":"Jay Baruchel","shortName":"Jay Baruchel"},{"name":"Alfred Molina","count":1,"group":"Alfred Molina","linkCount":1,"label":"Alfred Molina","shortName":"Alfred Molina"},{"name":"Teresa Palmer","count":1,"group":"Teresa Palmer","linkCount":1,"label":"Teresa Palmer","shortName":"Teresa Palmer"},{"name":"Crossroadz","count":4,"group":"Robert Scott","linkCount":4,"label":"Crossroadz","shortName":"Crossroadz"},{"name":"Robert Scott","count":1,"group":"Robert Scott","linkCount":1,"label":"Robert Scott","shortName":"Robert Scott"},{"name":"Rus Blackwell","count":1,"group":"Rus Blackwell","linkCount":1,"label":"Rus Blackwell","shortName":"Rus Blackwell"},{"name":"Minette Marcial","count":1,"group":"Minette Marcial","linkCount":1,"label":"Minette Marcial","shortName":"Minette Marcial"},{"name":"Robert Herrick","count":1,"group":"Robert Herrick","linkCount":1,"label":"Robert Herrick","shortName":"Robert Herrick"},{"name":"Ghost Rider: Spirit of Vengeance","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Ghost Rider: Spirit of Vengeance","shortName":"Ghost Rider: Spirit of Vengeance"},{"name":"Ciarán Hinds","count":1,"group":"Ciarán Hinds","linkCount":1,"label":"Ciarán Hinds","shortName":"Ciarán Hinds"},{"name":"Idris Elba","count":1,"group":"Idris Elba","linkCount":1,"label":"Idris Elba","shortName":"Idris Elba"},{"name":"Violante Placido","count":1,"group":"Violante Placido","linkCount":1,"label":"Violante Placido","shortName":"Violante Placido"},{"name":"Bad Lieutenant: Port of Call New Orleans","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Bad Lieutenant: Port of Call New Orleans","shortName":"Bad Lieutenant: Port of Call New Orleans"},{"name":"Russell M. Haeuser","count":1,"group":"Russell M. Haeuser","linkCount":1,"label":"Russell M. Haeuser","shortName":"Russell M. Haeuser"},{"name":"Val Kilmer","count":1,"group":"Val Kilmer","linkCount":1,"label":"Val Kilmer","shortName":"Val Kilmer"},{"name":"Plattenladen","count":2,"group":"Rick Kavanian","linkCount":2,"label":"Plattenladen","shortName":"Plattenladen"},{"name":"Rick Kavanian","count":1,"group":"Rick Kavanian","linkCount":1,"label":"Rick Kavanian","shortName":"Rick Kavanian"},{"name":"Michael Herbig","count":1,"group":"Michael Herbig","linkCount":1,"label":"Michael Herbig","shortName":"Michael Herbig"},{"name":"Johnbull & Rosekate","count":8,"group":"Blessing Nnaji","linkCount":8,"label":"Johnbull & Rosekate","shortName":"Johnbull & Rosekate"},{"name":"Blessing Nnaji","count":1,"group":"Blessing Nnaji","linkCount":1,"label":"Blessing Nnaji","shortName":"Blessing Nnaji"},{"name":"Nkem Owoh","count":1,"group":"Nkem Owoh","linkCount":1,"label":"Nkem Owoh","shortName":"Nkem Owoh"},{"name":"Tony Alor","count":1,"group":"Tony Alor","linkCount":1,"label":"Tony Alor","shortName":"Tony Alor"},{"name":"Charles Awurum","count":1,"group":"Charles Awurum","linkCount":1,"label":"Charles Awurum","shortName":"Charles Awurum"},{"name":"Uche Elendu","count":1,"group":"Uche Elendu","linkCount":1,"label":"Uche Elendu","shortName":"Uche Elendu"},{"name":"Diewait Ikpechukwu","count":1,"group":"Diewait Ikpechukwu","linkCount":1,"label":"Diewait Ikpechukwu","shortName":"Diewait Ikpechukwu"},{"name":"Bruno Iwuoha","count":1,"group":"Bruno Iwuoha","linkCount":1,"label":"Bruno Iwuoha","shortName":"Bruno Iwuoha"},{"name":"Camilla Mberekpe","count":1,"group":"Camilla Mberekpe","linkCount":1,"label":"Camilla Mberekpe","shortName":"Camilla Mberekpe"},{"name":"Seeking Justice","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Seeking Justice","shortName":"Seeking Justice"},{"name":"January Jones","count":1,"group":"January Jones","linkCount":1,"label":"January Jones","shortName":"January Jones"},{"name":"Guy Pearce","count":1,"group":"Guy Pearce","linkCount":1,"label":"Guy Pearce","shortName":"Guy Pearce"},{"name":"Harold Perrineau","count":1,"group":"Harold Perrineau","linkCount":1,"label":"Harold Perrineau","shortName":"Harold Perrineau"},{"name":"The Evil Jester of Masira/The Master Wizard of Mizwa","count":5,"group":"Barney Phillips","linkCount":5,"label":"The Evil Jester of Masira/The Master Wizard of Mizwa","shortName":"The Evil Jester of Masira/The Master Wizard of Mizwa"},{"name":"Barney Phillips","count":1,"group":"Barney Phillips","linkCount":1,"label":"Barney Phillips","shortName":"Barney Phillips"},{"name":"Janet Waldo","count":1,"group":"Janet Waldo","linkCount":1,"label":"Janet Waldo","shortName":"Janet Waldo"},{"name":"Jerry Dexter","count":1,"group":"Jerry Dexter","linkCount":1,"label":"Jerry Dexter","shortName":"Jerry Dexter"},{"name":"Don Messick","count":1,"group":"Don Messick","linkCount":1,"label":"Don Messick","shortName":"Don Messick"},{"name":"Paul Frees","count":1,"group":"Paul Frees","linkCount":1,"label":"Paul Frees","shortName":"Paul Frees"},{"name":"From Scrubs to Stilettos","count":2,"group":"Craig DeSilva","linkCount":2,"label":"From Scrubs to Stilettos","shortName":"From Scrubs to Stilettos"},{"name":"Craig DeSilva","count":2,"group":"Craig DeSilva","linkCount":2,"label":"Craig DeSilva","shortName":"Craig DeSilva"},{"name":"Kick-Ass","count":4,"group":"Aaron Taylor-Johnson","linkCount":4,"label":"Kick-Ass","shortName":"Kick-Ass"},{"name":"Aaron Taylor-Johnson","count":1,"group":"Aaron Taylor-Johnson","linkCount":1,"label":"Aaron Taylor-Johnson","shortName":"Aaron Taylor-Johnson"},{"name":"Chloë Grace Moretz","count":1,"group":"Chloë Grace Moretz","linkCount":1,"label":"Chloë Grace Moretz","shortName":"Chloë Grace Moretz"},{"name":"Garrett M. Brown","count":1,"group":"Garrett M. Brown","linkCount":1,"label":"Garrett M. Brown","shortName":"Garrett M. Brown"},{"name":"Dying of the Light","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Dying of the Light","shortName":"Dying of the Light"},{"name":"Anton Yelchin","count":1,"group":"Anton Yelchin","linkCount":1,"label":"Anton Yelchin","shortName":"Anton Yelchin"},{"name":"Alexander Karim","count":1,"group":"Alexander Karim","linkCount":1,"label":"Alexander Karim","shortName":"Alexander Karim"},{"name":"Irène Jacob","count":1,"group":"Irène Jacob","linkCount":1,"label":"Irène Jacob","shortName":"Irène Jacob"},{"name":"Drive Angry","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Drive Angry","shortName":"Drive Angry"},{"name":"Amber Heard","count":1,"group":"Amber Heard","linkCount":1,"label":"Amber Heard","shortName":"Amber Heard"},{"name":"William Fichtner","count":1,"group":"William Fichtner","linkCount":1,"label":"William Fichtner","shortName":"William Fichtner"},{"name":"Billy Burke","count":1,"group":"Billy Burke","linkCount":1,"label":"Billy Burke","shortName":"Billy Burke"},{"name":"Outcast","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Outcast","shortName":"Outcast"},{"name":"Hayden Christensen","count":1,"group":"Hayden Christensen","linkCount":1,"label":"Hayden Christensen","shortName":"Hayden Christensen"},{"name":"Alexandre Bailly","count":1,"group":"Alexandre Bailly","linkCount":1,"label":"Alexandre Bailly","shortName":"Alexandre Bailly"},{"name":"Bozhao Wang","count":1,"group":"Bozhao Wang","linkCount":1,"label":"Bozhao Wang","shortName":"Bozhao Wang"},{"name":"Can't Stand Losing You: Surviving the Police","count":3,"group":"Sting","linkCount":3,"label":"Can't Stand Losing You: Surviving the Police","shortName":"Can't Stand Losing You: Surviving the Police"},{"name":"Sting","count":1,"group":"Sting","linkCount":1,"label":"Sting","shortName":"Sting"},{"name":"Andy Summers","count":1,"group":"Andy Summers","linkCount":1,"label":"Andy Summers","shortName":"Andy Summers"},{"name":"Stewart Copeland","count":1,"group":"Stewart Copeland","linkCount":1,"label":"Stewart Copeland","shortName":"Stewart Copeland"},{"name":"Stolen","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Stolen","shortName":"Stolen"},{"name":"Malin Akerman","count":1,"group":"Malin Akerman","linkCount":1,"label":"Malin Akerman","shortName":"Malin Akerman"},{"name":"Josh Lucas","count":1,"group":"Josh Lucas","linkCount":1,"label":"Josh Lucas","shortName":"Josh Lucas"},{"name":"Danny Huston","count":1,"group":"Danny Huston","linkCount":1,"label":"Danny Huston","shortName":"Danny Huston"},{"name":"Trespass","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Trespass","shortName":"Trespass"},{"name":"Nicole Kidman","count":1,"group":"Nicole Kidman","linkCount":1,"label":"Nicole Kidman","shortName":"Nicole Kidman"},{"name":"Cam Gigandet","count":1,"group":"Cam Gigandet","linkCount":1,"label":"Cam Gigandet","shortName":"Cam Gigandet"},{"name":"Ben Mendelsohn","count":1,"group":"Ben Mendelsohn","linkCount":1,"label":"Ben Mendelsohn","shortName":"Ben Mendelsohn"},{"name":"The Frozen Ground","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Frozen Ground","shortName":"The Frozen Ground"},{"name":"Vanessa Hudgens","count":1,"group":"Vanessa Hudgens","linkCount":1,"label":"Vanessa Hudgens","shortName":"Vanessa Hudgens"},{"name":"Dean Norris","count":1,"group":"Dean Norris","linkCount":1,"label":"Dean Norris","shortName":"Dean Norris"},{"name":"USS Indianapolis: Men of Courage","count":4,"group":"Nicolas Cage","linkCount":4,"label":"USS Indianapolis: Men of Courage","shortName":"USS Indianapolis: Men of Courage"},{"name":"Tom Sizemore","count":1,"group":"Tom Sizemore","linkCount":1,"label":"Tom Sizemore","shortName":"Tom Sizemore"},{"name":"Thomas Jane","count":1,"group":"Thomas Jane","linkCount":1,"label":"Thomas Jane","shortName":"Thomas Jane"},{"name":"Matt Lanter","count":1,"group":"Matt Lanter","linkCount":1,"label":"Matt Lanter","shortName":"Matt Lanter"},{"name":"Close Up","count":4,"group":"Angela Valley","linkCount":4,"label":"Close Up","shortName":"Close Up"},{"name":"Angela Valley","count":1,"group":"Angela Valley","linkCount":1,"label":"Angela Valley","shortName":"Angela Valley"},{"name":"Ben Affleck","count":1,"group":"Ben Affleck","linkCount":1,"label":"Ben Affleck","shortName":"Ben Affleck"},{"name":"Jennifer Aniston","count":1,"group":"Jennifer Aniston","linkCount":1,"label":"Jennifer Aniston","shortName":"Jennifer Aniston"},{"name":"Drew Barrymore","count":1,"group":"Drew Barrymore","linkCount":1,"label":"Drew Barrymore","shortName":"Drew Barrymore"},{"name":"Joe","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Joe","shortName":"Joe"},{"name":"Tye Sheridan","count":1,"group":"Tye Sheridan","linkCount":1,"label":"Tye Sheridan","shortName":"Tye Sheridan"},{"name":"Gary Poulter","count":1,"group":"Gary Poulter","linkCount":1,"label":"Gary Poulter","shortName":"Gary Poulter"},{"name":"Ronnie Gene Blevins","count":1,"group":"Ronnie Gene Blevins","linkCount":1,"label":"Ronnie Gene Blevins","shortName":"Ronnie Gene Blevins"},{"name":"Rage","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Rage","shortName":"Rage"},{"name":"Rachel Nichols","count":1,"group":"Rachel Nichols","linkCount":1,"label":"Rachel Nichols","shortName":"Rachel Nichols"},{"name":"Max Ryan","count":1,"group":"Max Ryan","linkCount":1,"label":"Max Ryan","shortName":"Max Ryan"},{"name":"Michael McGrady","count":1,"group":"Michael McGrady","linkCount":1,"label":"Michael McGrady","shortName":"Michael McGrady"},{"name":"Left Behind","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Left Behind","shortName":"Left Behind"},{"name":"Lea Thompson","count":1,"group":"Lea Thompson","linkCount":1,"label":"Lea Thompson","shortName":"Lea Thompson"},{"name":"Cassi Thomson","count":1,"group":"Cassi Thomson","linkCount":1,"label":"Cassi Thomson","shortName":"Cassi Thomson"},{"name":"Chad Michael Murray","count":1,"group":"Chad Michael Murray","linkCount":1,"label":"Chad Michael Murray","shortName":"Chad Michael Murray"},{"name":"The Croods: A New Age","count":4,"group":"Ryan Reynolds","linkCount":4,"label":"The Croods: A New Age","shortName":"The Croods: A New Age"},{"name":"Kelly Marie Tran","count":1,"group":"Kelly Marie Tran","linkCount":1,"label":"Kelly Marie Tran","shortName":"Kelly Marie Tran"},{"name":"Inconceivable","count":4,"group":"Gina Gershon","linkCount":4,"label":"Inconceivable","shortName":"Inconceivable"},{"name":"Gina Gershon","count":1,"group":"Gina Gershon","linkCount":1,"label":"Gina Gershon","shortName":"Gina Gershon"},{"name":"Nicky Whelan","count":1,"group":"Nicky Whelan","linkCount":1,"label":"Nicky Whelan","shortName":"Nicky Whelan"},{"name":"Sienna Soho Baker","count":1,"group":"Sienna Soho Baker","linkCount":1,"label":"Sienna Soho Baker","shortName":"Sienna Soho Baker"},{"name":"The Runner","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Runner","shortName":"The Runner"},{"name":"Sarah Paulson","count":1,"group":"Sarah Paulson","linkCount":1,"label":"Sarah Paulson","shortName":"Sarah Paulson"},{"name":"Peter Fonda","count":1,"group":"Peter Fonda","linkCount":1,"label":"Peter Fonda","shortName":"Peter Fonda"},{"name":"Connie Nielsen","count":1,"group":"Connie Nielsen","linkCount":1,"label":"Connie Nielsen","shortName":"Connie Nielsen"},{"name":"The Trust","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Trust","shortName":"The Trust"},{"name":"Elijah Wood","count":1,"group":"Elijah Wood","linkCount":1,"label":"Elijah Wood","shortName":"Elijah Wood"},{"name":"Sky Ferreira","count":1,"group":"Sky Ferreira","linkCount":1,"label":"Sky Ferreira","shortName":"Sky Ferreira"},{"name":"Eric Heister","count":1,"group":"Eric Heister","linkCount":1,"label":"Eric Heister","shortName":"Eric Heister"},{"name":"Pay the Ghost","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Pay the Ghost","shortName":"Pay the Ghost"},{"name":"Sarah Wayne Callies","count":1,"group":"Sarah Wayne Callies","linkCount":1,"label":"Sarah Wayne Callies","shortName":"Sarah Wayne Callies"},{"name":"Veronica Ferres","count":1,"group":"Veronica Ferres","linkCount":1,"label":"Veronica Ferres","shortName":"Veronica Ferres"},{"name":"Lyriq Bent","count":1,"group":"Lyriq Bent","linkCount":1,"label":"Lyriq Bent","shortName":"Lyriq Bent"},{"name":"A Score to Settle","count":4,"group":"Nicolas Cage","linkCount":4,"label":"A Score to Settle","shortName":"A Score to Settle"},{"name":"Benjamin Bratt","count":1,"group":"Benjamin Bratt","linkCount":1,"label":"Benjamin Bratt","shortName":"Benjamin Bratt"},{"name":"Noah Le Gros","count":1,"group":"Noah Le Gros","linkCount":1,"label":"Noah Le Gros","shortName":"Noah Le Gros"},{"name":"Karolina Wydra","count":1,"group":"Karolina Wydra","linkCount":1,"label":"Karolina Wydra","shortName":"Karolina Wydra"},{"name":"Dog Eat Dog","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Dog Eat Dog","shortName":"Dog Eat Dog"},{"name":"Christopher Matthew Cook","count":1,"group":"Christopher Matthew Cook","linkCount":1,"label":"Christopher Matthew Cook","shortName":"Christopher Matthew Cook"},{"name":"Omar J. Dorsey","count":1,"group":"Omar J. Dorsey","linkCount":1,"label":"Omar J. Dorsey","shortName":"Omar J. Dorsey"},{"name":"Army of One","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Army of One","shortName":"Army of One"},{"name":"Russell Brand","count":1,"group":"Russell Brand","linkCount":1,"label":"Russell Brand","shortName":"Russell Brand"},{"name":"Wendi McLendon-Covey","count":1,"group":"Wendi McLendon-Covey","linkCount":1,"label":"Wendi McLendon-Covey","shortName":"Wendi McLendon-Covey"},{"name":"Amer Chadha-Patel","count":1,"group":"Amer Chadha-Patel","linkCount":1,"label":"Amer Chadha-Patel","shortName":"Amer Chadha-Patel"},{"name":"211","count":4,"group":"Nicolas Cage","linkCount":4,"label":"211","shortName":"211"},{"name":"Sophie Skelton","count":1,"group":"Sophie Skelton","linkCount":1,"label":"Sophie Skelton","shortName":"Sophie Skelton"},{"name":"Michael Rainey Jr.","count":1,"group":"Michael Rainey Jr.","linkCount":1,"label":"Michael Rainey Jr.","shortName":"Michael Rainey Jr."},{"name":"Dwayne Cameron","count":1,"group":"Dwayne Cameron","linkCount":1,"label":"Dwayne Cameron","shortName":"Dwayne Cameron"},{"name":"Color Out of Space","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Color Out of Space","shortName":"Color Out of Space"},{"name":"Joely Richardson","count":1,"group":"Joely Richardson","linkCount":1,"label":"Joely Richardson","shortName":"Joely Richardson"},{"name":"Madeleine Arthur","count":1,"group":"Madeleine Arthur","linkCount":1,"label":"Madeleine Arthur","shortName":"Madeleine Arthur"},{"name":"Elliot Knight","count":1,"group":"Elliot Knight","linkCount":1,"label":"Elliot Knight","shortName":"Elliot Knight"},{"name":"Mega Man VS Astro Boy","count":3,"group":"Ben Singer","linkCount":3,"label":"Mega Man VS Astro Boy","shortName":"Mega Man VS Astro Boy"},{"name":"Ben Singer","count":1,"group":"Ben Singer","linkCount":1,"label":"Ben Singer","shortName":"Ben Singer"},{"name":"Chad James","count":1,"group":"Chad James","linkCount":1,"label":"Chad James","shortName":"Chad James"},{"name":"Chris Guerrero","count":1,"group":"Chris Guerrero","linkCount":1,"label":"Chris Guerrero","shortName":"Chris Guerrero"},{"name":"Knights of the Golden Circle","count":2,"group":"Warren Getler","linkCount":2,"label":"Knights of the Golden Circle","shortName":"Knights of the Golden Circle"},{"name":"Warren Getler","count":1,"group":"Warren Getler","linkCount":1,"label":"Warren Getler","shortName":"Warren Getler"},{"name":"Roy Roush","count":1,"group":"Roy Roush","linkCount":1,"label":"Roy Roush","shortName":"Roy Roush"},{"name":"Vengeance: A Love Story","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Vengeance: A Love Story","shortName":"Vengeance: A Love Story"},{"name":"Anna Hutchison","count":1,"group":"Anna Hutchison","linkCount":1,"label":"Anna Hutchison","shortName":"Anna Hutchison"},{"name":"Talitha Eliana Bateman","count":1,"group":"Talitha Eliana Bateman","linkCount":1,"label":"Talitha Eliana Bateman","shortName":"Talitha Eliana Bateman"},{"name":"Deborah Kara Unger","count":1,"group":"Deborah Kara Unger","linkCount":1,"label":"Deborah Kara Unger","shortName":"Deborah Kara Unger"},{"name":"Mom and Dad","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Mom and Dad","shortName":"Mom and Dad"},{"name":"Selma Blair","count":1,"group":"Selma Blair","linkCount":1,"label":"Selma Blair","shortName":"Selma Blair"},{"name":"Anne Winters","count":1,"group":"Anne Winters","linkCount":1,"label":"Anne Winters","shortName":"Anne Winters"},{"name":"Zackary Arthur","count":1,"group":"Zackary Arthur","linkCount":1,"label":"Zackary Arthur","shortName":"Zackary Arthur"},{"name":"Arsenal","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Arsenal","shortName":"Arsenal"},{"name":"Adrian Grenier","count":1,"group":"Adrian Grenier","linkCount":1,"label":"Adrian Grenier","shortName":"Adrian Grenier"},{"name":"Johnathon Schaech","count":1,"group":"Johnathon Schaech","linkCount":1,"label":"Johnathon Schaech","shortName":"Johnathon Schaech"},{"name":"Mojado Mexican","count":1,"group":"Russi Taylor","linkCount":1,"label":"Mojado Mexican","shortName":"Mojado Mexican"},{"name":"Russi Taylor","count":1,"group":"Russi Taylor","linkCount":1,"label":"Russi Taylor","shortName":"Russi Taylor"},{"name":"Running with the Devil","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Running with the Devil","shortName":"Running with the Devil"},{"name":"Cole Hauser","count":1,"group":"Cole Hauser","linkCount":1,"label":"Cole Hauser","shortName":"Cole Hauser"},{"name":"Leslie Bibb","count":1,"group":"Leslie Bibb","linkCount":1,"label":"Leslie Bibb","shortName":"Leslie Bibb"},{"name":"Natalia Reyes","count":1,"group":"Natalia Reyes","linkCount":1,"label":"Natalia Reyes","shortName":"Natalia Reyes"},{"name":"Looking Glass","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Looking Glass","shortName":"Looking Glass"},{"name":"Robin Tunney","count":1,"group":"Robin Tunney","linkCount":1,"label":"Robin Tunney","shortName":"Robin Tunney"},{"name":"Marc Blucas","count":1,"group":"Marc Blucas","linkCount":1,"label":"Marc Blucas","shortName":"Marc Blucas"},{"name":"Ernie Lively","count":1,"group":"Ernie Lively","linkCount":1,"label":"Ernie Lively","shortName":"Ernie Lively"},{"name":"The Humanity Bureau","count":4,"group":"Nicolas Cage","linkCount":4,"label":"The Humanity Bureau","shortName":"The Humanity Bureau"},{"name":"Sarah Lind","count":1,"group":"Sarah Lind","linkCount":1,"label":"Sarah Lind","shortName":"Sarah Lind"},{"name":"Jakob Davies","count":1,"group":"Jakob Davies","linkCount":1,"label":"Jakob Davies","shortName":"Jakob Davies"},{"name":"Hugh Dillon","count":1,"group":"Hugh Dillon","linkCount":1,"label":"Hugh Dillon","shortName":"Hugh Dillon"},{"name":"Prisoners of the Ghostland","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Prisoners of the Ghostland","shortName":"Prisoners of the Ghostland"},{"name":"Sofia Boutella","count":1,"group":"Sofia Boutella","linkCount":1,"label":"Sofia Boutella","shortName":"Sofia Boutella"},{"name":"Ed Skrein","count":1,"group":"Ed Skrein","linkCount":1,"label":"Ed Skrein","shortName":"Ed Skrein"},{"name":"Bill Moseley","count":1,"group":"Bill Moseley","linkCount":1,"label":"Bill Moseley","shortName":"Bill Moseley"},{"name":"Becoming the Character","count":2,"group":"Gaetano Zuccoli","linkCount":2,"label":"Becoming the Character","shortName":"Becoming the Character"},{"name":"Gaetano Zuccoli","count":1,"group":"Gaetano Zuccoli","linkCount":1,"label":"Gaetano Zuccoli","shortName":"Gaetano Zuccoli"},{"name":"Tony Andres","count":1,"group":"Tony Andres","linkCount":1,"label":"Tony Andres","shortName":"Tony Andres"},{"name":"Mandy","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Mandy","shortName":"Mandy"},{"name":"Andrea Riseborough","count":1,"group":"Andrea Riseborough","linkCount":1,"label":"Andrea Riseborough","shortName":"Andrea Riseborough"},{"name":"Linus Roache","count":1,"group":"Linus Roache","linkCount":1,"label":"Linus Roache","shortName":"Linus Roache"},{"name":"Ned Dennehy","count":1,"group":"Ned Dennehy","linkCount":1,"label":"Ned Dennehy","shortName":"Ned Dennehy"},{"name":"Between Worlds","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Between Worlds","shortName":"Between Worlds"},{"name":"Franka Potente","count":1,"group":"Franka Potente","linkCount":1,"label":"Franka Potente","shortName":"Franka Potente"},{"name":"Penelope Mitchell","count":1,"group":"Penelope Mitchell","linkCount":1,"label":"Penelope Mitchell","shortName":"Penelope Mitchell"},{"name":"Garrett Clayton","count":1,"group":"Garrett Clayton","linkCount":1,"label":"Garrett Clayton","shortName":"Garrett Clayton"},{"name":"Primal","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Primal","shortName":"Primal"},{"name":"Famke Janssen","count":1,"group":"Famke Janssen","linkCount":1,"label":"Famke Janssen","shortName":"Famke Janssen"},{"name":"Kevin Durand","count":1,"group":"Kevin Durand","linkCount":1,"label":"Kevin Durand","shortName":"Kevin Durand"},{"name":"Jeremy Nazario","count":1,"group":"Jeremy Nazario","linkCount":1,"label":"Jeremy Nazario","shortName":"Jeremy Nazario"},{"name":"Wally's Wonderland","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Wally's Wonderland","shortName":"Wally's Wonderland"},{"name":"Beth Grant","count":1,"group":"Beth Grant","linkCount":1,"label":"Beth Grant","shortName":"Beth Grant"},{"name":"Caylee Cowan","count":1,"group":"Caylee Cowan","linkCount":1,"label":"Caylee Cowan","shortName":"Caylee Cowan"},{"name":"Emily Tosta","count":1,"group":"Emily Tosta","linkCount":1,"label":"Emily Tosta","shortName":"Emily Tosta"},{"name":"Grand Isle","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Grand Isle","shortName":"Grand Isle"},{"name":"KaDee Strickland","count":1,"group":"KaDee Strickland","linkCount":1,"label":"KaDee Strickland","shortName":"KaDee Strickland"},{"name":"Luke Benward","count":1,"group":"Luke Benward","linkCount":1,"label":"Luke Benward","shortName":"Luke Benward"},{"name":"Kelsey Grammer","count":1,"group":"Kelsey Grammer","linkCount":1,"label":"Kelsey Grammer","shortName":"Kelsey Grammer"},{"name":"Kill Chain","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Kill Chain","shortName":"Kill Chain"},{"name":"Anabelle Acosta","count":1,"group":"Anabelle Acosta","linkCount":1,"label":"Anabelle Acosta","shortName":"Anabelle Acosta"},{"name":"Enrico Colantoni","count":1,"group":"Enrico Colantoni","linkCount":1,"label":"Enrico Colantoni","shortName":"Enrico Colantoni"},{"name":"Ryan Kwanten","count":1,"group":"Ryan Kwanten","linkCount":1,"label":"Ryan Kwanten","shortName":"Ryan Kwanten"},{"name":"Jiu Jitsu","count":4,"group":"Nicolas Cage","linkCount":4,"label":"Jiu Jitsu","shortName":"Jiu Jitsu"},{"name":"Marie Avgeropoulos","count":1,"group":"Marie Avgeropoulos","linkCount":1,"label":"Marie Avgeropoulos","shortName":"Marie Avgeropoulos"},{"name":"Frank Grillo","count":1,"group":"Frank Grillo","linkCount":1,"label":"Frank Grillo","shortName":"Frank Grillo"},{"name":"Tony Jaa","count":1,"group":"Tony Jaa","linkCount":1,"label":"Tony Jaa","shortName":"Tony Jaa"} ],"links":[{"source":0,"target":1,"depth":7,"count":1},{"source":0,"target":2,"depth":7,"count":1},{"source":0,"target":3,"depth":7,"count":1},{"source":0,"target":4,"depth":7,"count":1},{"source":5,"target":3,"depth":7,"count":1},{"source":5,"target":6,"depth":7,"count":1},{"source":5,"target":7,"depth":7,"count":1},{"source":5,"target":8,"depth":7,"count":1},{"source":9,"target":10,"depth":7,"count":1},{"source":9,"target":3,"depth":7,"count":1},{"source":9,"target":11,"depth":7,"count":1},{"source":9,"target":12,"depth":7,"count":1},{"source":13,"target":14,"depth":7,"count":1},{"source":13,"target":15,"depth":7,"count":1},{"source":13,"target":3,"depth":7,"count":1},{"source":13,"target":16,"depth":7,"count":1},{"source":17,"target":3,"depth":7,"count":1},{"source":17,"target":18,"depth":7,"count":1},{"source":17,"target":19,"depth":7,"count":1},{"source":17,"target":20,"depth":7,"count":1},{"source":21,"target":22,"depth":7,"count":1},{"source":21,"target":3,"depth":7,"count":1},{"source":21,"target":23,"depth":7,"count":1},{"source":21,"target":24,"depth":7,"count":1},{"source":25,"target":26,"depth":7,"count":1},{"source":25,"target":3,"depth":7,"count":1},{"source":25,"target":27,"depth":7,"count":1},{"source":25,"target":28,"depth":7,"count":1},{"source":29,"target":3,"depth":7,"count":1},{"source":29,"target":30,"depth":7,"count":1},{"source":29,"target":31,"depth":7,"count":1},{"source":29,"target":32,"depth":7,"count":1},{"source":33,"target":3,"depth":7,"count":1},{"source":33,"target":34,"depth":7,"count":1},{"source":33,"target":35,"depth":7,"count":1},{"source":33,"target":36,"depth":7,"count":1},{"source":37,"target":3,"depth":7,"count":1},{"source":37,"target":38,"depth":7,"count":1},{"source":37,"target":39,"depth":7,"count":1},{"source":37,"target":40,"depth":7,"count":1},{"source":41,"target":42,"depth":7,"count":1},{"source":41,"target":3,"depth":7,"count":1},{"source":41,"target":43,"depth":7,"count":1},{"source":41,"target":44,"depth":7,"count":1},{"source":45,"target":3,"depth":7,"count":1},{"source":45,"target":46,"depth":7,"count":1},{"source":45,"target":47,"depth":7,"count":1},{"source":45,"target":48,"depth":7,"count":1},{"source":49,"target":3,"depth":7,"count":1},{"source":49,"target":42,"depth":7,"count":1},{"source":49,"target":50,"depth":7,"count":1},{"source":49,"target":51,"depth":7,"count":1},{"source":52,"target":3,"depth":7,"count":1},{"source":52,"target":53,"depth":7,"count":1},{"source":52,"target":54,"depth":7,"count":1},{"source":52,"target":55,"depth":7,"count":1},{"source":56,"target":57,"depth":7,"count":1},{"source":56,"target":3,"depth":7,"count":1},{"source":56,"target":58,"depth":7,"count":1},{"source":56,"target":59,"depth":7,"count":1},{"source":60,"target":3,"depth":7,"count":1},{"source":60,"target":61,"depth":7,"count":1},{"source":60,"target":62,"depth":7,"count":1},{"source":60,"target":63,"depth":7,"count":1},{"source":64,"target":3,"depth":7,"count":1},{"source":64,"target":65,"depth":7,"count":1},{"source":64,"target":66,"depth":7,"count":1},{"source":64,"target":67,"depth":7,"count":1},{"source":68,"target":69,"depth":7,"count":1},{"source":68,"target":70,"depth":7,"count":1},{"source":68,"target":3,"depth":7,"count":1},{"source":68,"target":71,"depth":7,"count":1},{"source":72,"target":73,"depth":7,"count":1},{"source":72,"target":3,"depth":7,"count":1},{"source":72,"target":74,"depth":7,"count":1},{"source":72,"target":75,"depth":7,"count":1},{"source":76,"target":3,"depth":7,"count":1},{"source":76,"target":77,"depth":7,"count":1},{"source":76,"target":78,"depth":7,"count":1},{"source":76,"target":79,"depth":7,"count":1},{"source":80,"target":3,"depth":7,"count":1},{"source":80,"target":81,"depth":7,"count":1},{"source":80,"target":82,"depth":7,"count":1},{"source":80,"target":83,"depth":7,"count":1},{"source":84,"target":85,"depth":7,"count":1},{"source":84,"target":65,"depth":7,"count":1},{"source":84,"target":3,"depth":7,"count":1},{"source":84,"target":86,"depth":7,"count":1},{"source":87,"target":3,"depth":7,"count":1},{"source":87,"target":88,"depth":7,"count":1},{"source":87,"target":89,"depth":7,"count":1},{"source":87,"target":90,"depth":7,"count":1},{"source":91,"target":92,"depth":7,"count":1},{"source":91,"target":3,"depth":7,"count":1},{"source":91,"target":93,"depth":7,"count":1},{"source":91,"target":94,"depth":7,"count":1},{"source":95,"target":3,"depth":7,"count":1},{"source":95,"target":96,"depth":7,"count":1},{"source":95,"target":97,"depth":7,"count":1},{"source":95,"target":98,"depth":7,"count":1},{"source":99,"target":100,"depth":7,"count":1},{"source":99,"target":3,"depth":7,"count":1},{"source":99,"target":101,"depth":7,"count":1},{"source":99,"target":102,"depth":7,"count":1},{"source":103,"target":3,"depth":7,"count":1},{"source":103,"target":104,"depth":7,"count":1},{"source":103,"target":105,"depth":7,"count":1},{"source":103,"target":106,"depth":7,"count":1},{"source":107,"target":3,"depth":7,"count":1},{"source":107,"target":108,"depth":7,"count":1},{"source":107,"target":109,"depth":7,"count":1},{"source":107,"target":110,"depth":7,"count":1},{"source":111,"target":3,"depth":7,"count":1},{"source":111,"target":112,"depth":7,"count":1},{"source":111,"target":113,"depth":7,"count":1},{"source":111,"target":114,"depth":7,"count":1},{"source":115,"target":3,"depth":7,"count":1},{"source":115,"target":116,"depth":7,"count":1},{"source":115,"target":32,"depth":7,"count":1},{"source":115,"target":117,"depth":7,"count":1},{"source":118,"target":3,"depth":7,"count":1},{"source":118,"target":119,"depth":7,"count":1},{"source":118,"target":120,"depth":7,"count":1},{"source":118,"target":121,"depth":7,"count":1},{"source":122,"target":97,"depth":7,"count":1},{"source":122,"target":50,"depth":7,"count":1},{"source":122,"target":123,"depth":7,"count":1},{"source":122,"target":124,"depth":7,"count":1},{"source":125,"target":3,"depth":7,"count":1},{"source":125,"target":126,"depth":7,"count":1},{"source":125,"target":127,"depth":7,"count":1},{"source":125,"target":128,"depth":7,"count":1},{"source":129,"target":130,"depth":7,"count":1},{"source":129,"target":131,"depth":7,"count":1},{"source":129,"target":132,"depth":7,"count":1},{"source":129,"target":133,"depth":7,"count":1},{"source":134,"target":3,"depth":7,"count":1},{"source":134,"target":135,"depth":7,"count":1},{"source":134,"target":136,"depth":7,"count":1},{"source":134,"target":137,"depth":7,"count":1},{"source":138,"target":3,"depth":7,"count":1},{"source":138,"target":139,"depth":7,"count":1},{"source":138,"target":140,"depth":7,"count":1},{"source":138,"target":141,"depth":7,"count":1},{"source":142,"target":143,"depth":7,"count":1},{"source":142,"target":144,"depth":7,"count":1},{"source":142,"target":3,"depth":7,"count":1},{"source":142,"target":145,"depth":7,"count":1},{"source":146,"target":3,"depth":7,"count":1},{"source":146,"target":147,"depth":7,"count":1},{"source":146,"target":148,"depth":7,"count":1},{"source":146,"target":149,"depth":7,"count":1},{"source":150,"target":151,"depth":7,"count":1},{"source":150,"target":144,"depth":7,"count":1},{"source":150,"target":152,"depth":7,"count":1},{"source":150,"target":153,"depth":7,"count":1},{"source":154,"target":155,"depth":7,"count":1},{"source":154,"target":156,"depth":7,"count":1},{"source":154,"target":157,"depth":7,"count":1},{"source":154,"target":158,"depth":7,"count":1},{"source":159,"target":3,"depth":7,"count":1},{"source":159,"target":160,"depth":7,"count":1},{"source":159,"target":161,"depth":7,"count":1},{"source":159,"target":162,"depth":7,"count":1},{"source":163,"target":3,"depth":7,"count":1},{"source":163,"target":164,"depth":7,"count":1},{"source":163,"target":165,"depth":7,"count":1},{"source":163,"target":166,"depth":7,"count":1},{"source":167,"target":168,"depth":7,"count":1},{"source":167,"target":3,"depth":7,"count":1},{"source":167,"target":169,"depth":7,"count":1},{"source":167,"target":170,"depth":7,"count":1},{"source":171,"target":3,"depth":7,"count":1},{"source":171,"target":172,"depth":7,"count":1},{"source":171,"target":173,"depth":7,"count":1},{"source":171,"target":174,"depth":7,"count":1},{"source":175,"target":3,"depth":7,"count":1},{"source":175,"target":176,"depth":7,"count":1},{"source":175,"target":177,"depth":7,"count":1},{"source":175,"target":178,"depth":7,"count":1},{"source":179,"target":180,"depth":7,"count":1},{"source":179,"target":3,"depth":7,"count":1},{"source":179,"target":181,"depth":7,"count":1},{"source":179,"target":147,"depth":7,"count":1},{"source":182,"target":3,"depth":7,"count":1},{"source":182,"target":183,"depth":7,"count":1},{"source":182,"target":184,"depth":7,"count":1},{"source":182,"target":185,"depth":7,"count":1},{"source":186,"target":3,"depth":7,"count":2},{"source":186,"target":187,"depth":7,"count":1},{"source":186,"target":188,"depth":7,"count":1},{"source":186,"target":189,"depth":7,"count":1},{"source":190,"target":3,"depth":7,"count":1},{"source":190,"target":191,"depth":7,"count":1},{"source":190,"target":192,"depth":7,"count":1},{"source":190,"target":193,"depth":7,"count":1},{"source":194,"target":3,"depth":7,"count":1},{"source":194,"target":164,"depth":7,"count":1},{"source":194,"target":165,"depth":7,"count":1},{"source":194,"target":195,"depth":7,"count":1},{"source":196,"target":3,"depth":7,"count":1},{"source":196,"target":197,"depth":7,"count":1},{"source":196,"target":198,"depth":7,"count":1},{"source":196,"target":199,"depth":7,"count":1},{"source":200,"target":3,"depth":7,"count":1},{"source":200,"target":201,"depth":7,"count":1},{"source":200,"target":202,"depth":7,"count":1},{"source":200,"target":203,"depth":7,"count":1},{"source":204,"target":3,"depth":7,"count":1},{"source":204,"target":205,"depth":7,"count":1},{"source":204,"target":206,"depth":7,"count":1},{"source":204,"target":207,"depth":7,"count":1},{"source":208,"target":209,"depth":7,"count":1},{"source":208,"target":210,"depth":7,"count":1},{"source":208,"target":211,"depth":7,"count":1},{"source":208,"target":212,"depth":7,"count":1},{"source":213,"target":214,"depth":7,"count":1},{"source":215,"target":3,"depth":7,"count":1},{"source":215,"target":216,"depth":7,"count":1},{"source":215,"target":217,"depth":7,"count":1},{"source":215,"target":218,"depth":7,"count":1},{"source":219,"target":3,"depth":7,"count":1},{"source":219,"target":220,"depth":7,"count":1},{"source":219,"target":221,"depth":7,"count":1},{"source":219,"target":222,"depth":7,"count":1},{"source":223,"target":224,"depth":7,"count":1},{"source":223,"target":225,"depth":7,"count":1},{"source":223,"target":226,"depth":7,"count":1},{"source":223,"target":227,"depth":7,"count":1},{"source":228,"target":3,"depth":7,"count":1},{"source":228,"target":229,"depth":7,"count":1},{"source":228,"target":230,"depth":7,"count":1},{"source":228,"target":231,"depth":7,"count":1},{"source":232,"target":3,"depth":7,"count":1},{"source":232,"target":139,"depth":7,"count":1},{"source":232,"target":233,"depth":7,"count":1},{"source":232,"target":234,"depth":7,"count":1},{"source":235,"target":236,"depth":7,"count":1},{"source":235,"target":237,"depth":7,"count":1},{"source":238,"target":239,"depth":7,"count":1},{"source":238,"target":240,"depth":7,"count":1},{"source":238,"target":241,"depth":7,"count":1},{"source":238,"target":242,"depth":7,"count":1},{"source":238,"target":243,"depth":7,"count":1},{"source":238,"target":244,"depth":7,"count":1},{"source":238,"target":245,"depth":7,"count":1},{"source":238,"target":246,"depth":7,"count":1},{"source":247,"target":3,"depth":7,"count":1},{"source":247,"target":248,"depth":7,"count":1},{"source":247,"target":249,"depth":7,"count":1},{"source":247,"target":250,"depth":7,"count":1},{"source":251,"target":252,"depth":7,"count":1},{"source":251,"target":253,"depth":7,"count":1},{"source":251,"target":254,"depth":7,"count":1},{"source":251,"target":255,"depth":7,"count":1},{"source":251,"target":256,"depth":7,"count":1},{"source":257,"target":258,"depth":7,"count":2},{"source":259,"target":260,"depth":7,"count":1},{"source":259,"target":3,"depth":7,"count":1},{"source":259,"target":261,"depth":7,"count":1},{"source":259,"target":262,"depth":7,"count":1},{"source":263,"target":3,"depth":7,"count":1},{"source":263,"target":264,"depth":7,"count":1},{"source":263,"target":265,"depth":7,"count":1},{"source":263,"target":266,"depth":7,"count":1},{"source":267,"target":3,"depth":7,"count":1},{"source":267,"target":268,"depth":7,"count":1},{"source":267,"target":269,"depth":7,"count":1},{"source":267,"target":270,"depth":7,"count":1},{"source":271,"target":3,"depth":7,"count":1},{"source":271,"target":272,"depth":7,"count":1},{"source":271,"target":273,"depth":7,"count":1},{"source":271,"target":274,"depth":7,"count":1},{"source":275,"target":276,"depth":7,"count":1},{"source":275,"target":277,"depth":7,"count":1},{"source":275,"target":278,"depth":7,"count":1},{"source":279,"target":3,"depth":7,"count":1},{"source":279,"target":280,"depth":7,"count":1},{"source":279,"target":281,"depth":7,"count":1},{"source":279,"target":282,"depth":7,"count":1},{"source":283,"target":3,"depth":7,"count":1},{"source":283,"target":284,"depth":7,"count":1},{"source":283,"target":285,"depth":7,"count":1},{"source":283,"target":286,"depth":7,"count":1},{"source":287,"target":3,"depth":7,"count":1},{"source":287,"target":288,"depth":7,"count":1},{"source":287,"target":96,"depth":7,"count":1},{"source":287,"target":289,"depth":7,"count":1},{"source":290,"target":3,"depth":7,"count":1},{"source":290,"target":291,"depth":7,"count":1},{"source":290,"target":292,"depth":7,"count":1},{"source":290,"target":293,"depth":7,"count":1},{"source":294,"target":295,"depth":7,"count":1},{"source":294,"target":296,"depth":7,"count":1},{"source":294,"target":297,"depth":7,"count":1},{"source":294,"target":298,"depth":7,"count":1},{"source":299,"target":3,"depth":7,"count":1},{"source":299,"target":300,"depth":7,"count":1},{"source":299,"target":301,"depth":7,"count":1},{"source":299,"target":302,"depth":7,"count":1},{"source":303,"target":3,"depth":7,"count":1},{"source":303,"target":304,"depth":7,"count":1},{"source":303,"target":305,"depth":7,"count":1},{"source":303,"target":306,"depth":7,"count":1},{"source":307,"target":3,"depth":7,"count":1},{"source":307,"target":308,"depth":7,"count":1},{"source":307,"target":309,"depth":7,"count":1},{"source":307,"target":310,"depth":7,"count":1},{"source":311,"target":205,"depth":7,"count":1},{"source":311,"target":3,"depth":7,"count":1},{"source":311,"target":206,"depth":7,"count":1},{"source":311,"target":312,"depth":7,"count":1},{"source":313,"target":314,"depth":7,"count":1},{"source":313,"target":315,"depth":7,"count":1},{"source":313,"target":3,"depth":7,"count":1},{"source":313,"target":316,"depth":7,"count":1},{"source":317,"target":3,"depth":7,"count":1},{"source":317,"target":318,"depth":7,"count":1},{"source":317,"target":319,"depth":7,"count":1},{"source":317,"target":320,"depth":7,"count":1},{"source":321,"target":3,"depth":7,"count":1},{"source":321,"target":322,"depth":7,"count":1},{"source":321,"target":323,"depth":7,"count":1},{"source":321,"target":324,"depth":7,"count":1},{"source":325,"target":3,"depth":7,"count":1},{"source":325,"target":326,"depth":7,"count":1},{"source":325,"target":327,"depth":7,"count":1},{"source":325,"target":328,"depth":7,"count":1},{"source":329,"target":3,"depth":7,"count":1},{"source":329,"target":330,"depth":7,"count":1},{"source":329,"target":331,"depth":7,"count":1},{"source":329,"target":332,"depth":7,"count":1},{"source":333,"target":3,"depth":7,"count":1},{"source":333,"target":50,"depth":7,"count":1},{"source":333,"target":334,"depth":7,"count":1},{"source":333,"target":335,"depth":7,"count":1},{"source":336,"target":3,"depth":7,"count":1},{"source":336,"target":337,"depth":7,"count":1},{"source":336,"target":338,"depth":7,"count":1},{"source":336,"target":339,"depth":7,"count":1},{"source":340,"target":3,"depth":7,"count":1},{"source":340,"target":341,"depth":7,"count":1},{"source":340,"target":342,"depth":7,"count":1},{"source":340,"target":343,"depth":7,"count":1},{"source":344,"target":3,"depth":7,"count":1},{"source":344,"target":345,"depth":7,"count":1},{"source":344,"target":346,"depth":7,"count":1},{"source":344,"target":347,"depth":7,"count":1},{"source":348,"target":349,"depth":7,"count":1},{"source":348,"target":350,"depth":7,"count":1},{"source":348,"target":351,"depth":7,"count":1},{"source":352,"target":353,"depth":7,"count":1},{"source":352,"target":354,"depth":7,"count":1},{"source":355,"target":3,"depth":7,"count":1},{"source":355,"target":356,"depth":7,"count":1},{"source":355,"target":357,"depth":7,"count":1},{"source":355,"target":358,"depth":7,"count":1},{"source":359,"target":3,"depth":7,"count":1},{"source":359,"target":360,"depth":7,"count":1},{"source":359,"target":361,"depth":7,"count":1},{"source":359,"target":362,"depth":7,"count":1},{"source":363,"target":3,"depth":7,"count":1},{"source":363,"target":96,"depth":7,"count":1},{"source":363,"target":364,"depth":7,"count":1},{"source":363,"target":365,"depth":7,"count":1},{"source":366,"target":367,"depth":7,"count":1},{"source":368,"target":3,"depth":7,"count":1},{"source":368,"target":369,"depth":7,"count":1},{"source":368,"target":370,"depth":7,"count":1},{"source":368,"target":371,"depth":7,"count":1},{"source":372,"target":3,"depth":7,"count":1},{"source":372,"target":373,"depth":7,"count":1},{"source":372,"target":374,"depth":7,"count":1},{"source":372,"target":375,"depth":7,"count":1},{"source":376,"target":3,"depth":7,"count":1},{"source":376,"target":377,"depth":7,"count":1},{"source":376,"target":378,"depth":7,"count":1},{"source":376,"target":379,"depth":7,"count":1},{"source":380,"target":3,"depth":7,"count":1},{"source":380,"target":381,"depth":7,"count":1},{"source":380,"target":382,"depth":7,"count":1},{"source":380,"target":383,"depth":7,"count":1},{"source":384,"target":385,"depth":7,"count":1},{"source":384,"target":386,"depth":7,"count":1},{"source":387,"target":3,"depth":7,"count":1},{"source":387,"target":388,"depth":7,"count":1},{"source":387,"target":389,"depth":7,"count":1},{"source":387,"target":390,"depth":7,"count":1},{"source":391,"target":3,"depth":7,"count":1},{"source":391,"target":392,"depth":7,"count":1},{"source":391,"target":393,"depth":7,"count":1},{"source":391,"target":394,"depth":7,"count":1},{"source":395,"target":3,"depth":7,"count":1},{"source":395,"target":396,"depth":7,"count":1},{"source":395,"target":397,"depth":7,"count":1},{"source":395,"target":398,"depth":7,"count":1},{"source":399,"target":3,"depth":7,"count":1},{"source":399,"target":400,"depth":7,"count":1},{"source":399,"target":401,"depth":7,"count":1},{"source":399,"target":402,"depth":7,"count":1},{"source":403,"target":3,"depth":7,"count":1},{"source":403,"target":404,"depth":7,"count":1},{"source":403,"target":405,"depth":7,"count":1},{"source":403,"target":406,"depth":7,"count":1},{"source":407,"target":3,"depth":7,"count":1},{"source":407,"target":408,"depth":7,"count":1},{"source":407,"target":409,"depth":7,"count":1},{"source":407,"target":410,"depth":7,"count":1},{"source":411,"target":3,"depth":7,"count":1},{"source":411,"target":412,"depth":7,"count":1},{"source":411,"target":413,"depth":7,"count":1},{"source":411,"target":414,"depth":7,"count":1} ]}}};
+</script></head><body><div>Cage Actors:<strong></strong><span style="color:darslateblue;"> <small>click a node to focus</small></span></div>
+  <div id="chart">
+
+  </div>
+
+ </body>
+</html>
